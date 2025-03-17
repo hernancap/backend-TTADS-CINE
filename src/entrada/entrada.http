@@ -1,0 +1,37 @@
+### Obtener todas las entradas
+GET http://localhost:3000/api/entradas
+
+### ID
+@id = 67bbd4597da6b7dc5c8ce51b
+
+### Obtener una entrada por ID
+GET http://localhost:3000/api/entradas/{{id}}
+
+### Crear una nueva entrada
+POST http://localhost:3000/api/entradas
+Content-Type: application/json
+
+{"precio":1,"usuario":"67c66c6d95dcf84fd1a72461","funcion":"67d724a980b5e6cb7f07b779","asiento":"67d7249780b5e6cb7f07b777"}
+
+### Actualizar una entrada (PUT - recurso completo)
+PUT http://localhost:3000/api/entradas/{{id}}
+Content-Type: application/json
+
+{
+  "precio": 600,
+  "usuario": "65a1b2c3d4e5f6a7b8c9d0e1", 
+  "funcion": "65a1b2c3d4e5f6a7b8c9d0e2", 
+  "fila": "B",
+  "numeroAsiento": 2
+}
+
+### Actualizar una entrada (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/entradas/{{id}}
+Content-Type: application/json
+
+{
+  "precio": 700
+}
+
+### Eliminar una entrada
+DELETE http://localhost:3000/api/entradas/{{id}}

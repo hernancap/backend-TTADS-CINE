@@ -1,0 +1,67 @@
+### obtener todas las peliculas
+GET http://localhost:3000/api/peliculas
+
+### ID
+@id = 67bbf08b0c415fd76712ea2a
+
+### obtener un movie
+GET http://localhost:3000/api/peliculas/{{id}}
+
+### POST a movie
+POST http://localhost:3000/api/peliculas
+Content-Type: application/json
+
+{
+    "nombre": "The Matrix",
+    "genero": "Science Fiction",
+    "duracion": 136,
+    "director": "Lana Wachowski, Lilly Wachowski",
+    "actors": [
+        "67bbe163290e18eb9a837dcf"
+    ]
+}
+
+### modificar movie (PUT - recurso completo)
+PUT http://localhost:3000/api/peliculas/{{id}}
+Content-Type: application/json
+
+{
+    "nombre": "Interstellar",
+    "genero": "Science-Fiction",
+    "duracion": 269,
+    "director": "Christopher Nolan",
+    "actors": [
+        {
+      "id": 2,
+      "nombre": "Tom Hardy"
+    },
+    {
+      "id": "67a5308ac76e4549bc1a4d47",
+      "nombre": "Brad Pitt"
+    }
+    ]
+}
+
+### TEST
+PUT http://localhost:3000/api/peliculas/{{id}}
+Content-Type: application/json
+
+{
+    "id":"67a4ed80b4a513903a03d999",
+    "nombre":"test 22",
+    "genero":"testest2",
+    "duracion":"123",
+    "director":"tttttttttt",
+    "actors":[]
+}
+
+### modificar movie (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/peliculas/{{id}}
+Content-Type: application/json
+
+{
+    "director": "Christopher Dioslan"
+}
+
+### borrar una movie
+DELETE http://localhost:3000/api/peliculas/{{id}}

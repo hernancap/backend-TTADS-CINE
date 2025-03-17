@@ -1,0 +1,50 @@
+### GET ALL
+GET http://localhost:3000/api/actors
+
+### POST
+# @nombre createActor
+POST http://localhost:3000/api/actors
+Content-Type: application/json
+
+{
+    "nombre": "Brad Pitt"
+}
+
+### ID
+@id = {{}}
+
+### GET ONE
+GET http://localhost:3000/api/actors/{{id}}
+
+
+### modificar  (PUT - recurso completo)
+PUT http://localhost:3000/api/actors/{{id}}
+Content-Type: application/json
+
+{
+    "nombre": "Interstellar",
+    "genre": "Science-Fiction",
+    "duration": 269,
+    "director": "Christopher Nolan",
+    "actors": [
+        {
+      "id": 2,
+      "nombre": "Tom Hardy"
+    },
+    {
+      "id": "67a5308ac76e4549bc1a4d47",
+      "nombre": "Brad Pitt"
+    }
+    ]
+}
+
+### modificar  (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/actors/{{id}}
+Content-Type: application/json
+
+{
+    "director": "Christopher Dioslan"
+}
+
+### borrar un actor
+DELETE http://localhost:3000/api/actors/{{id}}

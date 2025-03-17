@@ -1,0 +1,45 @@
+### Variables Globales Usuarios
+@baseUrlUsuarios = http://localhost:3000/api/usuarios
+@usuarioId = 65f0123456789abcdef12345
+
+### Obtener todos los usuarios
+GET {{baseUrlUsuarios}}
+
+### Obtener me
+GET {{baseUrlUsuarios}}/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2M2NmM2ZDk1ZGNmODRmZDFhNzI0NjEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQxMTk5NzY1LCJleHAiOjE3NDEyMDMzNjV9.nZ7XFADl_Ng9wmDe8K0hAcxHJLnfkE38z5JKhG8K-bI
+
+### Obtener un usuario por ID
+GET {{baseUrlUsuarios}}/{{usuarioId}}
+
+### Crear un nuevo usuario
+POST {{baseUrlUsuarios}}
+Content-Type: application/json
+
+{
+    "nombre": "Juan Perez",
+    "email": "asd2@test.com",
+    "password": "88888888",
+    "tipo": "admin"
+}
+
+### Actualizar usuario completo (PUT)
+PUT {{baseUrlUsuarios}}/{{usuarioId}}
+Content-Type: application/json
+
+{
+    "nombre": "Juan Perez Actualizado",
+    "email": "juan.actualizado@example.com",
+    "password": "NuevoPassw0rd!"
+}
+
+### Actualizar usuario parcial (PATCH)
+PATCH {{baseUrlUsuarios}}/{{usuarioId}}
+Content-Type: application/json
+
+{
+    "nombre": "Juan Carlos Perez"
+}
+
+### Eliminar usuario
+DELETE {{baseUrlUsuarios}}/{{usuarioId}}

@@ -1,0 +1,51 @@
+### Obtener todas las funciones
+GET http://localhost:3000/api/funciones
+
+### Variables Globales
+@baseUrl = http://localhost:3000/api/funciones
+@funcionId = 67bbd081cb53397dcc322b26
+
+### Obtener una función por ID
+GET {{baseUrl}}/{{funcionId}}
+
+### Crear una nueva función
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "fechaHora": "2024-03-25T20:00:00.000Z",
+    "sala": "67bbd055cb53397dcc322afd",
+    "pelicula": "67bbd036cb53397dcc322afc",
+    "precio": 1500,
+    "isActive": true,
+    "isCancelled": false
+}
+
+### Actualizar una función (PUT - recurso completo)
+PUT {{baseUrl}}/{{funcionId}}
+Content-Type: application/json
+
+{
+    "fechaHora": "2024-02-26T20:00:00.000Z",
+    "sala": "65f0123456789abcdef12346",
+    "pelicula": "65f0123456789abcdef12347",
+    "precio": 1500,
+    "isActive": true,
+    "isCancelled": false
+}
+
+### Actualizar una función parcialmente (PATCH)
+PATCH {{baseUrl}}/{{funcionId}}
+Content-Type: application/json
+
+{
+    "precio": 2000,
+    "fechaHora": "2024-02-27T20:00:00.000Z"
+}
+
+### Eliminar una función
+DELETE {{baseUrl}}/{{funcionId}}
+
+### Cancelar una función
+POST {{baseUrl}}/{{funcionId}}/cancel
+Content-Type: application/json

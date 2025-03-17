@@ -1,0 +1,39 @@
+### Obtener todas las salas
+GET http://localhost:3000/api/salas
+
+### ID
+@id = 67bbd055cb53397dcc322afd
+
+### Obtener una sala por ID
+GET http://localhost:3000/api/salas/{{id}}
+
+### Crear una nueva sala
+POST http://localhost:3000/api/salas
+Content-Type: application/json
+
+{
+  "nombre": "Sala 2",
+  "numRows": 5,
+  "seatsPerRow": 8
+}
+
+### Actualizar una sala (PUT - recurso completo)
+PUT http://localhost:3000/api/salas/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Sala 2",
+  "numRows": 12,
+  "seatsPerRow": 10
+}
+
+### Actualizar una sala (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/salas/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Sala 3"
+}
+
+### Eliminar una sala
+DELETE http://localhost:3000/api/salas/{{id}}
