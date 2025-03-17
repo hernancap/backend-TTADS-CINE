@@ -153,11 +153,23 @@ async function update(req: Request, res: Response) {
 
 async function remove(req: Request, res: Response) {
   try {
-    const id = req.params.id;
-    const funcion = await em.findOneOrFail(Funcion, { _id: new ObjectId(id) });
+    const em = orm.em.fork();
+    await em.begin();
+
+    const funcion = await em.findOneOrFail(
+      Funcion,
+      { _id: new ObjectId(req.params.id) },
+      { populate: ['entradas'] } 
+    );
+
+    funcion.entradas.getItems().forEach(entrada => em.remove(entrada));
+
     await em.removeAndFlush(funcion);
-    res.status(200).json({ message: "Funcion deleted" });
+    await em.commit();
+
+    res.status(200).json({ message: "Función y entradas relacionadas eliminadas" });
   } catch (error: any) {
+    await em.rollback();
     res.status(500).json({ message: error.message });
   }
 }

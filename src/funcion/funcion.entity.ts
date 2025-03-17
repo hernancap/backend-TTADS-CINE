@@ -1,4 +1,4 @@
-import { Entity, Property, ManyToOne, OneToMany, Collection, Rel, Formula } from "@mikro-orm/core";
+import { Entity, Property, ManyToOne, OneToMany, Collection, Rel, Cascade } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/db/baseEntity.entity.js";
 import { Sala } from "../sala/sala.entity.js";
 import { Pelicula } from "../pelicula/pelicula.entity.js";
@@ -15,7 +15,10 @@ export class Funcion extends BaseEntity {
     @ManyToOne(() => Pelicula, { nullable: false })
     pelicula!: Rel<Pelicula>;
     
-    @OneToMany(() => Entrada, entrada => entrada.funcion)
+    @OneToMany(() => Entrada, entrada => entrada.funcion, {
+        cascade: [Cascade.ALL], 
+        orphanRemoval: true 
+      })
     entradas = new Collection<Entrada>(this);
 
     @Property({ nullable: false, default: false })

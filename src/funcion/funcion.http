@@ -14,8 +14,8 @@ Content-Type: application/json
 
 {
     "fechaHora": "2024-03-25T20:00:00.000Z",
-    "sala": "67bbd055cb53397dcc322afd",
-    "pelicula": "67bbd036cb53397dcc322afc",
+    "sala": "67d78ba69f4073a8dbe2f54e",
+    "pelicula": "67bbf08b0c415fd76712ea2a",
     "precio": 1500,
     "isActive": true,
     "isCancelled": false

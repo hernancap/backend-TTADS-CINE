@@ -82,8 +82,7 @@ async function login(req: Request, res: Response) {
 	}
   }
   
-
-async function getMe(req: AuthenticatedRequest, res: Response) {
+  async function getMe(req: AuthenticatedRequest, res: Response) {
 	try {
 	  const userId = req.user?.userId;
   
@@ -93,22 +92,63 @@ async function getMe(req: AuthenticatedRequest, res: Response) {
   
 	  const usuario = await em.findOneOrFail(
 		Usuario,
-		{ _id: new ObjectId(userId) },
-		{ populate: ["entradas"] }
+		{ _id: ObjectId.createFromHexString(userId) },
+		{ 
+		  populate: [
+			'entradas', 
+          'entradas.funcion', 
+          'entradas.funcion.sala', 
+          'entradas.funcion.pelicula', 
+          'entradas.asiento', 
+          'entradas.asiento.sala'
+		  ] 
+		}
 	  );
   
-	  const { password: _, _id, ...rest } = usuario;
-	  if (!_id) {
-		return res.status(404).json({ message: "Usuario no encontrado" });
-	  }
-	  const safeUser = { ...rest, id: _id.toHexString() };
+	  const { password, _id, entradas, ...rest } = usuario;
+	  
+	  const entradasFormateadas = usuario.entradas.getItems().map(entrada => ({
+		id: entrada.id,
+		precio: entrada.precio,
+		fechaCompra: entrada.fechaCompra,
+		funcion: {
+		  id: entrada.funcion.id,
+		  fechaHora: entrada.funcion.fechaHora,
+		  precio: entrada.funcion.precio,
+		  sala: entrada.funcion.sala ? {
+			id: entrada.funcion.sala.id,
+			nombre: entrada.funcion.sala.nombre
+		  } : null,
+		  pelicula: {
+			id: entrada.funcion.pelicula.id,
+			nombre: entrada.funcion.pelicula.nombre,
+			duracion: entrada.funcion.pelicula.duracion
+		  }
+		},
+		asiento: {
+		  id: entrada.asiento.id,
+		  fila: entrada.asiento.fila,
+		  numero: entrada.asiento.numero,
+		  sala: entrada.asiento.sala ? {
+			id: entrada.asiento.sala.id,
+			nombre: entrada.asiento.sala.nombre
+		  } : null
+		}
+	  }));
+  
+	  const safeUser = {
+		...rest,
+		id: _id!.toString(), 
+		entradas: entradasFormateadas
+	  };
   
 	  res.status(200).json({
 		message: "Usuario autenticado",
-		data: safeUser,
+		data: safeUser
 	  });
 	} catch (error) {
 	  res.status(404).json({ message: "Usuario no encontrado" });
+	  console.error(error) 
 	}
   }
   
