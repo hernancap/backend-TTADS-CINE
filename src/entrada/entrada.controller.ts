@@ -5,6 +5,7 @@ import { ObjectId } from "@mikro-orm/mongodb";
 import { Usuario } from "../usuario/usuario.entity.js";
 import { Funcion } from "../funcion/funcion.entity.js";
 import { Asiento } from "../asiento/asiento.entity.js";
+import { Cupon } from "../cupon/cupon.entity.js";
 
 const em = orm.em;
 
@@ -24,6 +25,22 @@ function sanitizeEntradaInput(req: Request, res: Response, next: NextFunction) {
   });
 
   next();
+}
+
+async function checkCupon(em: typeof orm.em, usuario: Usuario): Promise<void> {
+  const entradasCount = await em.count(Entrada, { usuario });
+  if (entradasCount % 5 === 0) {
+    const codigo = "codigoCupon";
+    const fechaExpiracion = new Date();
+    fechaExpiracion.setMonth(fechaExpiracion.getMonth() + 1);
+    const newCoupon = em.create(Cupon, {
+      codigo: codigo,
+      descuento: 10, 
+      fechaExpiracion: fechaExpiracion,
+      usuario,
+    });
+    await em.persistAndFlush(newCoupon);
+  }
 }
 
 async function findAll(req: Request, res: Response) {
@@ -76,6 +93,9 @@ async function add(req: Request, res: Response) {
       });
       
       await em.persistAndFlush(entrada);
+
+      await checkCupon(em, usuario);
+
       return entrada;
     });
     

@@ -12,3 +12,4 @@ usuarioRouter.put("/:id", sanitizeUsuarioInput, authenticate, authAdmin, update)
 usuarioRouter.patch("/:id", sanitizeUsuarioInput, authenticate, authAdmin, update);
 usuarioRouter.delete("/:id", authenticate, authAdmin, remove);
 usuarioRouter.post("/login", login);
+usuarioRouter.post("/register", sanitizeUsuarioInput, add);
