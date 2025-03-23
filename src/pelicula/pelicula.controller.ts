@@ -13,7 +13,9 @@ function sanitizePeliculaInput(req: Request, res: Response, next: NextFunction){
         genero: req.body.genero,
         duracion: req.body.duracion,
         director: req.body.director,
-        actors: req.body.actors
+        actors: req.body.actors,
+        enCartelera: req.body.enCartelera,
+        proximamente: req.body.proximamente,
     }
     Object.keys(req.body.sanitizedInput).forEach(key=>{
         if(req.body.sanitizedInput[key] === undefined){
@@ -23,14 +25,22 @@ function sanitizePeliculaInput(req: Request, res: Response, next: NextFunction){
     next()
 }
 
-async function findAll(req:Request, res:Response) {
+async function findAll(req: Request, res: Response) {
     try {
-        const peliculas = await em.find(Pelicula, {}, {populate:['actors']})
-        res.status(200).json({message: 'found all peliculas', data: peliculas})
+      const { enCartelera, proximamente } = req.query;
+            const filter: any = {};
+      if (enCartelera !== undefined) {
+        filter.enCartelera = enCartelera === 'true';
+      }
+      if (proximamente !== undefined) {
+        filter.proximamente = proximamente === 'true';
+      }
+      const peliculas = await em.find(Pelicula, filter, { populate: ['actors'] });
+      res.status(200).json({ message: 'found all peliculas', data: peliculas });
     } catch (error: any) {
-        res.status(500).json({message: error.message})
+      res.status(500).json({ message: error.message });
     }
-}
+  }
 
 async function findOne(req: Request, res: Response) {
     try {

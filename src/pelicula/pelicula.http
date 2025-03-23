@@ -42,19 +42,6 @@ Content-Type: application/json
     ]
 }
 
-### TEST
-PUT http://localhost:3000/api/peliculas/{{id}}
-Content-Type: application/json
-
-{
-    "id":"67a4ed80b4a513903a03d999",
-    "nombre":"test 22",
-    "genero":"testest2",
-    "duracion":"123",
-    "director":"tttttttttt",
-    "actors":[]
-}
-
 ### modificar movie (PATCH - recurso parcial)
 PATCH http://localhost:3000/api/peliculas/{{id}}
 Content-Type: application/json

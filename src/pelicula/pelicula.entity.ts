@@ -20,5 +20,12 @@ export class Pelicula extends BaseEntity{
         owner: true
     })
     actors = new Collection<Actor>(this) 
+
+    @Property({ type: 'boolean', default: true })
+    enCartelera: boolean = false;  
+
+    @Property({ type: 'boolean', default: false })
+    proximamente: boolean = true; 
+
 } 
 
