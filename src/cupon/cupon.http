@@ -1,0 +1,5 @@
+### Obtener todos
+GET http://localhost:3000/api/cupones
+
+### Obtener cupones usuario
+GET http://localhost:3000/api/cupones/usuario/67c66c6d95dcf84fd1a72461

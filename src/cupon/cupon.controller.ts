@@ -24,6 +24,16 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
+async function findByUser(req: Request, res: Response) {
+  try {
+    const { userId } = req.params;
+    const cupones = await em.find(Cupon, { usuario: new ObjectId(userId) });
+    res.status(200).json({ message: "Cupones del usuario encontrados", data: cupones });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 async function add(req: Request, res: Response) {
   try {
     const { codigo, descuento, fechaExpiracion, usuario } = req.body;
@@ -69,4 +79,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { findAll, findOne, add, update, remove };
+export { findAll, findOne, add, update, remove, findByUser };
