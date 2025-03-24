@@ -4,7 +4,7 @@
 
 ### Obtener todos los usuarios
 GET {{baseUrlUsuarios}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2M2NmM2ZDk1ZGNmODRmZDFhNzI0NjEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQyMjQ0NzUxLCJleHAiOjE3NDIyNDgzNTF9.DpvLVOzf2xtU9bOOo0A1TU6CElYQGG-W--6SPdw9bmc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2M2NmM2ZDk1ZGNmODRmZDFhNzI0NjEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQyODU0NjUyLCJleHAiOjE3NDI4NTgyNTJ9.uLEbANT5zOrD4L_caCf5JUVdgSgxbYZ9eWAcrhe863w
 
 ### Obtener me
 GET {{baseUrlUsuarios}}/me

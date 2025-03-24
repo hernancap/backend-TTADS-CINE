@@ -4,6 +4,7 @@ import { orm } from "../shared/db/orm.js";
 import { NotFoundError, ObjectId } from "@mikro-orm/mongodb";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Pelicula } from "../pelicula/pelicula.entity.js";
 
 const em = orm.em; 
 
@@ -13,6 +14,8 @@ function sanitizeUsuarioInput(req: Request, res: Response, next: NextFunction) {
 		email: req.body.email?.trim().toLowerCase(),
 		password: req.body.password,
 		tipo: req.body.tipo,
+		cupones: req.body.cupones,
+		favoritos: req.body.favoritos,
 	};
 
 	Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -100,7 +103,9 @@ async function login(req: Request, res: Response) {
           'entradas.funcion.sala', 
           'entradas.funcion.pelicula', 
           'entradas.asiento', 
-          'entradas.asiento.sala'
+          'entradas.asiento.sala',
+		  'cupones',
+		  'favoritos',
 		  ] 
 		}
 	  );
@@ -247,10 +252,29 @@ async function update(req: Request, res: Response) {
 			input.password = await bcrypt.hash(input.password, 10);
 		}
 
+		if (input.favoritos) {
+			const peliculaIds = (input.favoritos as string[]).map(id => 
+			  ObjectId.createFromHexString(id)
+			);
+			
+			const peliculas = await em.find(Pelicula, { _id: { $in: peliculaIds } });
+			usuario.favoritos.set(peliculas);
+			
+			delete input.favoritos;
+		  }
+
 		em.assign(usuario, input);
 		await em.flush();
 
-		const { password: _, ...safeUser } = usuario;
+		const usuarioPop = await em.findOneOrFail(Usuario, { _id: usuario._id }, { 
+			populate: ['favoritos'] 
+		  });
+
+		const { password: _, _id, ...resto } = usuarioPop;
+		const safeUser = {
+			id: _id?.toString(),
+			...resto
+		};
 		res.status(200).json({
 			message: "Usuario actualizado",
 			data: safeUser,

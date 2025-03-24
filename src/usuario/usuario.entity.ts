@@ -34,7 +34,10 @@ export class Usuario extends BaseEntity {
   })
   cupones = new Collection<Cupon>(this);
 
-  @ManyToMany(() => Pelicula)
+  @ManyToMany(() => Pelicula, pelicula => pelicula.usuariosFavoritos, {
+	owner: true,
+	eager: false 
+  })
   favoritos = new Collection<Pelicula>(this);
 
 }

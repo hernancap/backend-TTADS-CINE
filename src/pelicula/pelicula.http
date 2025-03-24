@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/peliculas
 
 ### ID
-@id = 67bbf08b0c415fd76712ea2a
+@id = 67bcca1a70901ae90231b06e
 
 ### obtener un movie
 GET http://localhost:3000/api/peliculas/{{id}}
@@ -47,7 +47,8 @@ PATCH http://localhost:3000/api/peliculas/{{id}}
 Content-Type: application/json
 
 {
-    "director": "Christopher Dioslan"
+    "enCartelera": true,
+    "proximamente": false
 }
 
 ### borrar una movie
