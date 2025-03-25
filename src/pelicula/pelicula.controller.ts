@@ -61,6 +61,7 @@ async function add(req: Request, res: Response) {
         const pelicula = em.create(Pelicula, {
             ...req.body.sanitizedInput,
             actors,
+            poster_path: req.file?.filename,
         });
 
         await em.flush();
@@ -75,6 +76,10 @@ async function update(req: Request, res: Response) {
     try {
         const id = req.params.id;
         const movieToUpdate = await em.findOneOrFail(Pelicula, { _id: new ObjectId(id) });
+
+        if (req.file) {
+            movieToUpdate.poster_path = req.file.filename;
+          }
         
         const actorInputs = req.body.sanitizedInput.actors || [];
         const actorIds = actorInputs.map((actor: any) => ObjectId.createFromHexString(actor.id));

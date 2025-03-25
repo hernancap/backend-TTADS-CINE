@@ -30,4 +30,7 @@ export class Pelicula extends BaseEntity {
 
 	@ManyToMany(() => Usuario, (usuario) => usuario.favoritos)
 	usuariosFavoritos = new Collection<Usuario>(this);
+
+    @Property({ nullable: true })
+    poster_path?: string; 
 }

@@ -13,6 +13,7 @@ import { usuarioRouter } from './usuario/usuario.routes.js'
 import { cuponRouter } from './cupon/cupon.routes.js'
 
 const app = express()
+app.use('/uploads', express.static('uploads')); 
 
 app.use(cors({
     origin: 'http://localhost:5173', 
