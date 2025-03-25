@@ -4,18 +4,20 @@ import { orm } from "../shared/db/orm.js"
 import { Actor } from "../actor/actor.entity.js"
 import { ObjectId } from '@mikro-orm/mongodb';
 
-const em = orm.em
-
 function sanitizePeliculaInput(req: Request, res: Response, next: NextFunction){
+
+  const actors = Array.isArray(req.body.actors)
+    ? req.body.actors
+    : req.body.actors ? [req.body.actors] : [];
 
     req.body.sanitizedInput = {
         nombre: req.body.nombre,
         genero: req.body.genero,
         duracion: req.body.duracion,
         director: req.body.director,
-        actors: req.body.actors,
-        enCartelera: req.body.enCartelera,
-        proximamente: req.body.proximamente,
+        actors: actors,
+        enCartelera: req.body.enCartelera === 'true',
+        proximamente: req.body.proximamente === 'true',
     }
     Object.keys(req.body.sanitizedInput).forEach(key=>{
         if(req.body.sanitizedInput[key] === undefined){
@@ -26,6 +28,7 @@ function sanitizePeliculaInput(req: Request, res: Response, next: NextFunction){
 }
 
 async function findAll(req: Request, res: Response) {
+  const em = orm.em.fork();
     try {
       const { enCartelera, proximamente } = req.query;
             const filter: any = {};
@@ -43,6 +46,7 @@ async function findAll(req: Request, res: Response) {
   }
 
 async function findOne(req: Request, res: Response) {
+  const em = orm.em.fork();
     try {
         const id = req.params.id;
         const pelicula = await em.findOneOrFail(Pelicula, { _id: new ObjectId(id) }, { populate: ['actors'] });
@@ -53,6 +57,7 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function add(req: Request, res: Response) {
+  const em = orm.em.fork();
     try {
         const actorIds = (req.body.sanitizedInput.actors || []).map((id: string) => new ObjectId(id));
 
@@ -73,6 +78,7 @@ async function add(req: Request, res: Response) {
 
 
 async function update(req: Request, res: Response) {
+  const em = orm.em.fork();
     try {
         const id = req.params.id;
         const movieToUpdate = await em.findOneOrFail(Pelicula, { _id: new ObjectId(id) });
@@ -82,7 +88,7 @@ async function update(req: Request, res: Response) {
           }
         
         const actorInputs = req.body.sanitizedInput.actors || [];
-        const actorIds = actorInputs.map((actor: any) => ObjectId.createFromHexString(actor.id));
+        const actorIds = actorInputs.map(ObjectId.createFromHexString);
         const actors = await em.find(Actor, { _id: { $in: actorIds } });
         
         em.assign(movieToUpdate, { 
@@ -98,6 +104,7 @@ async function update(req: Request, res: Response) {
 }
 
 async function remove(req: Request, res: Response) {
+  const em = orm.em.fork();
     try {
       const id = req.params.id;
   
