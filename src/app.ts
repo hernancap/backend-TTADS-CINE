@@ -11,8 +11,14 @@ import { funcionRouter } from './funcion/funcion.routes.js'
 import { entradaRouter } from './entrada/entrada.routes.js'
 import { usuarioRouter } from './usuario/usuario.routes.js'
 import { cuponRouter } from './cupon/cupon.routes.js'
+import dotenv from 'dotenv'
+
+import { mercadoPagorouter } from './mercadoPagoTest/mercadopago.routes.js'
+
 
 const app = express()
+
+dotenv.config();
 app.use('/uploads', express.static('uploads')); 
 
 app.use(cors({
@@ -36,6 +42,8 @@ app.use('/api/funciones', funcionRouter)
 app.use('/api/entradas', entradaRouter)
 app.use('/api/usuarios', usuarioRouter)
 app.use('/api/cupones', cuponRouter)
+
+app.use('/api/mercadopago', mercadoPagorouter);
 
 app.use((_, res)=>{
     res.status(404).send({message: 'Resource not found'})

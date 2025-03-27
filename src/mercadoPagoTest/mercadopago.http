@@ -1,0 +1,14 @@
+### TEST
+POST http://localhost:3000/api/mercadopago/create-preference
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "id": "333",
+      "title": "Entrada Cine",
+      "quantity": 1,
+      "unit_price": 2000
+    }
+  ]
+}
