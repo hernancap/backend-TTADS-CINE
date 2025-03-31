@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { Asiento } from "./asiento.entity.js";
 import { orm } from "../shared/db/orm.js";
-import { LockMode, ObjectId } from "@mikro-orm/mongodb";
+import { ObjectId } from "@mikro-orm/mongodb";
 import { Sala } from "../sala/sala.entity.js";
-import { Funcion } from "../funcion/funcion.entity.js";
-import { Entrada } from "../entrada/entrada.entity.js";
+import { AsientoFuncion, EstadoAsiento } from "../asientoFuncion/asientoFuncion.entity.js";
 
 const em = orm.em;
 
@@ -12,7 +11,7 @@ function sanitizeAsientoInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
     fila: req.body.fila,
     numero: req.body.numero,
-    sala: req.body.sala, 
+    sala: req.body.sala,
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -20,48 +19,26 @@ function sanitizeAsientoInput(req: Request, res: Response, next: NextFunction) {
       delete req.body.sanitizedInput[key];
     }
   });
-
   next();
 }
 
 async function checkAvailability(req: Request, res: Response) {
   try {
-    const availability = await orm.em.transactional(async (em) => {
-      const funcion = await em.findOneOrFail(
-        Funcion,
-        { _id: ObjectId.createFromHexString(req.params.funcionId) },
-        { lockMode: LockMode.PESSIMISTIC_READ }
-      );
-      
-      const asientos = await em.find(
-        Asiento,
-        { sala: funcion.sala },
-        { lockMode: LockMode.PESSIMISTIC_READ }
-      );
-      
-      const asientosDisponibles = await Promise.all(
-        asientos.map(async (asiento) => {
-          const entrada = await em.findOne(Entrada, { 
-            asiento: asiento, 
-            funcion: funcion 
-          });
-          return {
-            id: asiento.id,
-            fila: asiento.fila,
-            numero: asiento.numero,
-            isOccupied: !!entrada,
-          };
-        })
-      );
-      
-      return asientosDisponibles;
-    });
+    const funcionId = ObjectId.createFromHexString(req.params.funcionId);
+    const asientosFuncion = await orm.em.find(AsientoFuncion, { funcion: funcionId }, { populate: ['asiento'] });
+    
+    const availability = asientosFuncion.map(af => ({
+      id: af.asiento.id,
+      fila: af.asiento.fila,
+      numero: af.asiento.numero,
+      isOccupied: af.estado !== EstadoAsiento.DISPONIBLE,
+    }));
+    
     res.status(200).json({ data: availability });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 }
-
 
 async function findAll(req: Request, res: Response) {
   try {

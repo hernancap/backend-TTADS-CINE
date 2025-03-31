@@ -4,6 +4,7 @@ import { orm } from "../shared/db/orm.js";
 import { ObjectId } from "@mikro-orm/mongodb";
 import { Sala } from "../sala/sala.entity.js";
 import { Pelicula } from "../pelicula/pelicula.entity.js";
+import { AsientoFuncion, EstadoAsiento } from "../asientoFuncion/asientoFuncion.entity.js";
 
 const em = orm.em;
 
@@ -13,8 +14,6 @@ function sanitizeFuncionInput(req: Request, res: Response, next: NextFunction) {
       sala: req.body.sala,
       pelicula: req.body.pelicula,
       precio: Number(req.body.precio),
-      isActive: req.body.isActive ?? true,
-      isCancelled: req.body.isCancelled ?? false
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -23,24 +22,6 @@ function sanitizeFuncionInput(req: Request, res: Response, next: NextFunction) {
       }
   });
   next();
-}
-
-async function cancelFunction(req: Request, res: Response) {
-  const em = orm.em.fork();
-  try {
-      const funcion = await em.findOneOrFail(Funcion, { _id: new ObjectId(req.params.id) });
-      funcion.isCancelled = true;
-      funcion.isActive = false;
-
-      await em.flush(); 
-
-      res.status(200).json({
-          message: "Función cancelada exitosamente",
-          data: funcion
-      });
-  } catch (error: any) {
-      res.status(500).json({ message: error.message });
-  }
 }
 
 async function findAll(req: Request, res: Response) {
@@ -72,16 +53,10 @@ async function findOne(req: Request, res: Response) {
 
 async function add(req: Request, res: Response) {
   try {
-    console.log("Iniciando método add");
-    
     const emFork = orm.em.fork();
-    console.log("EntityManager forkeado creado");
 
     await emFork.transactional(async (em) => {
-      console.log("Entrando en la transacción");
-
       const { sala: salaId, pelicula: peliculaId, ...rest } = req.body.sanitizedInput;
-      console.log("Datos recibidos:", { salaId, peliculaId, rest });
 
       const sala = await em.findOneOrFail(Sala, { 
         _id: ObjectId.createFromHexString(salaId.toString()) 
@@ -89,7 +64,6 @@ async function add(req: Request, res: Response) {
       const pelicula = await em.findOneOrFail(Pelicula, { 
         _id: ObjectId.createFromHexString(peliculaId.toString()) 
       });
-      console.log("Sala y película encontradas:", { sala, pelicula });
 
       const funcionesExistentes = await em.find(Funcion, {
         sala,
@@ -98,30 +72,32 @@ async function add(req: Request, res: Response) {
           $lte: new Date(rest.fechaHora.getTime() + 2 * 60 * 60 * 1000)
         }
       });
-      console.log("Funciones existentes en horario cercano:", funcionesExistentes);
-
       if (funcionesExistentes.length > 0) {
-        console.log("Error: Ya existe una función en el horario");
         throw new Error('Ya existe una función programada en esta sala en un horario cercano');
       }
 
-      em.create(Funcion, {
+      const nuevaFuncion = em.create(Funcion, {
         ...rest,
         sala,
         pelicula
       });
-      console.log("Función creada en el EntityManager, preparando para flush");
-      
       await em.flush();
-      console.log("Flush completado");
+
+      for (const asiento of sala.asientos.getItems()) {
+        const asientoFuncion = em.create(AsientoFuncion, {
+          funcion: nuevaFuncion,
+          asiento,
+          estado: EstadoAsiento.DISPONIBLE, 
+        });
+        nuevaFuncion.asientosFuncion.add(asientoFuncion);
+      }
+      await em.flush();
     });
 
-    console.log("Transacción completada con éxito");
     res.status(201).json({
       message: "Función creada exitosamente"
     });
   } catch (error: any) {
-    console.error("Error en el método add:", error);
     res.status(500).json({ message: error.message });
   }
 }
@@ -174,4 +150,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { sanitizeFuncionInput, findAll, findOne, add, update, remove, cancelFunction };
+export { sanitizeFuncionInput, findAll, findOne, add, update, remove };

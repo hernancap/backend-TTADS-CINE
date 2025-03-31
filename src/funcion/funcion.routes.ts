@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sanitizeFuncionInput, findAll, findOne, add, update, remove, cancelFunction } from "./funcion.controller.js";
+import { sanitizeFuncionInput, findAll, findOne, add, update, remove } from "./funcion.controller.js";
 
 export const funcionRouter = Router();
 
@@ -9,4 +9,3 @@ funcionRouter.post("/", sanitizeFuncionInput, add);
 funcionRouter.put("/:id", sanitizeFuncionInput, update);
 funcionRouter.patch("/:id", sanitizeFuncionInput, update);
 funcionRouter.delete("/:id", remove);
-funcionRouter.post("/:id/cancel", cancelFunction);

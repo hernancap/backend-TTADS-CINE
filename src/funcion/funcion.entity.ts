@@ -3,6 +3,7 @@ import { BaseEntity } from "../shared/db/baseEntity.entity.js";
 import { Sala } from "../sala/sala.entity.js";
 import { Pelicula } from "../pelicula/pelicula.entity.js";
 import { Entrada } from "../entrada/entrada.entity.js";
+import { AsientoFuncion } from "../asientoFuncion/asientoFuncion.entity.js"; // Importa la nueva entidad
 
 @Entity()
 export class Funcion extends BaseEntity {
@@ -18,16 +19,15 @@ export class Funcion extends BaseEntity {
     @OneToMany(() => Entrada, entrada => entrada.funcion, {
         cascade: [Cascade.ALL], 
         orphanRemoval: true 
-      })
+    })
     entradas = new Collection<Entrada>(this);
-
-    @Property({ nullable: false, default: false })
-    isCancelled: boolean = false;
-
-    @Property({ nullable: false, default: true })
-    isActive: boolean = true;
+    
+    @OneToMany(() => AsientoFuncion, asientoFuncion => asientoFuncion.funcion, {
+      cascade: [Cascade.ALL],
+      orphanRemoval: true,
+    })
+    asientosFuncion = new Collection<AsientoFuncion>(this);
 
     @Property({ nullable: false })
     precio!: number;
-
 }

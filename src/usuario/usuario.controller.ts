@@ -97,16 +97,17 @@ async function login(req: Request, res: Response) {
 		Usuario,
 		{ _id: ObjectId.createFromHexString(userId) },
 		{ 
-		  populate: [
-			'entradas', 
-          'entradas.funcion', 
-          'entradas.funcion.sala', 
-          'entradas.funcion.pelicula', 
-          'entradas.asiento', 
-          'entradas.asiento.sala',
-		  'cupones',
-		  'favoritos',
-		  ] 
+			populate: [
+				'entradas', 
+				'entradas.funcion', 
+				'entradas.funcion.sala', 
+				'entradas.funcion.pelicula', 
+				'entradas.asientoFuncion', 
+				'entradas.asientoFuncion.asiento', 
+				'entradas.asientoFuncion.asiento.sala',
+				'cupones',
+				'favoritos',
+			]
 		}
 	  );
   
@@ -131,13 +132,13 @@ async function login(req: Request, res: Response) {
 		  }
 		},
 		asiento: {
-		  id: entrada.asiento.id,
-		  fila: entrada.asiento.fila,
-		  numero: entrada.asiento.numero,
-		  sala: entrada.asiento.sala ? {
-			id: entrada.asiento.sala.id,
-			nombre: entrada.asiento.sala.nombre
-		  } : null
+			id: entrada.asientoFuncion.asiento.id,
+			fila: entrada.asientoFuncion.asiento.fila,
+			numero: entrada.asientoFuncion.asiento.numero,
+	  		sala: entrada.asientoFuncion.asiento.sala ? {
+		    	id: entrada.asientoFuncion.asiento.sala.id,
+		    	nombre: entrada.asientoFuncion.asiento.sala.nombre
+			} : null
 		}
 	  }));
   

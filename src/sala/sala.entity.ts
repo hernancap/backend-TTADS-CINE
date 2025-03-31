@@ -4,17 +4,12 @@ import { Asiento } from "../asiento/asiento.entity.js";
 
 @Entity()
 export class Sala extends BaseEntity {
-  @Property({ nullable: false })
+  @Property({ nullable: false, unique: true })
   nombre!: string;
 
-  @Property({ nullable: false })
-  numFilas!: number;
-
-  @Property({ nullable: false })
-  asientosPorFila!: number;
-
   @OneToMany(() => Asiento, asiento => asiento.sala, {
-    cascade: [Cascade.REMOVE] 
+    cascade: [Cascade.ALL],
+    orphanRemoval: true,
   })
   asientos = new Collection<Asiento>(this);
 }

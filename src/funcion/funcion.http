@@ -17,8 +17,6 @@ Content-Type: application/json
     "sala": "67d78ba69f4073a8dbe2f54e",
     "pelicula": "67bbf08b0c415fd76712ea2a",
     "precio": 1500,
-    "isActive": true,
-    "isCancelled": false
 }
 
 ### Actualizar una función (PUT - recurso completo)
@@ -30,8 +28,6 @@ Content-Type: application/json
     "sala": "65f0123456789abcdef12346",
     "pelicula": "65f0123456789abcdef12347",
     "precio": 1500,
-    "isActive": true,
-    "isCancelled": false
 }
 
 ### Actualizar una función parcialmente (PATCH)

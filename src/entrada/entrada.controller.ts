@@ -4,7 +4,7 @@ import { orm } from "../shared/db/orm.js";
 import { ObjectId } from "@mikro-orm/mongodb";
 import { Usuario } from "../usuario/usuario.entity.js";
 import { Funcion } from "../funcion/funcion.entity.js";
-import { Asiento } from "../asiento/asiento.entity.js";
+import { AsientoFuncion, EstadoAsiento } from "../asientoFuncion/asientoFuncion.entity.js";
 import { Cupon } from "../cupon/cupon.entity.js";
 
 const em = orm.em;
@@ -45,7 +45,7 @@ async function checkCupon(em: typeof orm.em, usuario: Usuario): Promise<void> {
 
 async function findAll(req: Request, res: Response) {
   try {
-    const entradas = await em.find(Entrada, {}, { populate: ["usuario", "funcion"] });
+    const entradas = await em.find(Entrada, {}, { populate: ["usuario", "funcion", "asientoFuncion"] });
     res.status(200).json({ message: "Found all entradas", data: entradas });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -58,7 +58,7 @@ async function findOne(req: Request, res: Response) {
     const entrada = await em.findOneOrFail(
       Entrada,
       { _id: ObjectId.createFromHexString(id) },
-      { populate: ["usuario", "funcion"] }
+      { populate: ["usuario", "funcion", "asientoFuncion"] }
     );
     res.status(200).json({ message: "Found entrada", data: entrada });
   } catch (error: any) {
@@ -73,24 +73,29 @@ async function add(req: Request, res: Response) {
       
       const usuario = await em.findOneOrFail(Usuario, { _id: ObjectId.createFromHexString(usuarioId) });
       const funcion = await em.findOneOrFail(Funcion, { _id: ObjectId.createFromHexString(funcionId) });
-      const asiento = await em.findOneOrFail(Asiento, { _id: ObjectId.createFromHexString(asientoId) });
       
-      if (asiento.sala.id !== funcion.sala.id) {
-        throw new Error('El asiento no pertenece a la sala de esta función');
+      const asientoFuncion = await em.findOne(AsientoFuncion, {
+        funcion,
+        asiento: { _id: ObjectId.createFromHexString(asientoId) }
+      });
+      
+      if (!asientoFuncion) {
+        throw new Error('El asiento no existe en esta función');
       }
       
-      const entradaExistente = await em.findOne(Entrada, { asiento, funcion });
-      if (entradaExistente) {
+      if (asientoFuncion.estado !== EstadoAsiento.DISPONIBLE) {
         throw new Error('El asiento ya está ocupado para esta función');
       }
-      
+
       const entrada = em.create(Entrada, {
         precio,
         usuario,
         funcion,
-        asiento,
+        asientoFuncion, 
         fechaCompra: new Date()
       });
+      
+      asientoFuncion.estado = EstadoAsiento.VENDIDO;
       
       await em.persistAndFlush(entrada);
 
@@ -141,7 +146,7 @@ async function remove(req: Request, res: Response) {
   try {
       await em.begin();
       
-      const entrada = await em.findOneOrFail(Entrada, { _id: ObjectId.createFromHexString(req.params.id) }, { populate: ['asiento'] });
+      const entrada = await em.findOneOrFail(Entrada, { _id: ObjectId.createFromHexString(req.params.id) }, { populate: ['asientoFuncion'] });
       
       await em.removeAndFlush(entrada);
       await em.commit();

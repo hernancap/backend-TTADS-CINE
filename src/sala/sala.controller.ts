@@ -9,8 +9,6 @@ const em = orm.em;
 function sanitizeSalaInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
     nombre: req.body.nombre,
-    numFilas: Number(req.body.numFilas),       
-    asientosPorFila: Number(req.body.asientosPorFila), 
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -18,7 +16,6 @@ function sanitizeSalaInput(req: Request, res: Response, next: NextFunction) {
       delete req.body.sanitizedInput[key];
     }
   });
-
   next();
 }
 
@@ -45,19 +42,14 @@ async function add(req: Request, res: Response) {
   try {
     const data = req.body.sanitizedInput;
     const sala = em.create(Sala, data);
-   
-    for (let i = 0; i < data.numFilas; i++) {
-      const rowLetter = String.fromCharCode(65 + i);
-      for (let j = 1; j <= data.asientosPorFila; j++) {
-        const asiento = em.create(Asiento, { 
-          fila: rowLetter, 
-          numero: j, 
-          sala
-        });
+
+    if (req.body.asientos && Array.isArray(req.body.asientos)) {
+      req.body.asientos.forEach((asientoData: any) => {
+        const asiento = em.create(Asiento, { ...asientoData, sala });
         sala.asientos.add(asiento);
-      }
+      });
     }
-   
+
     await em.flush();
     res.status(201).json({ message: "Sala created", data: sala });
   } catch (error: any) {
@@ -83,7 +75,6 @@ async function remove(req: Request, res: Response) {
     const sala = await em.findOneOrFail(Sala, { _id: new ObjectId(id) }, {
       populate: ['asientos']
     });
-    
     await em.removeAndFlush(sala);
     res.status(200).json({ message: "Sala y sus asientos eliminados" });
   } catch (error: any) {
