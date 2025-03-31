@@ -58,9 +58,10 @@ async function add(req: Request, res: Response) {
     await emFork.transactional(async (em) => {
       const { sala: salaId, pelicula: peliculaId, ...rest } = req.body.sanitizedInput;
 
-      const sala = await em.findOneOrFail(Sala, { 
-        _id: ObjectId.createFromHexString(salaId.toString()) 
-      });
+      const sala = await em.findOneOrFail(Sala,
+        { _id: ObjectId.createFromHexString(salaId.toString()) },
+        { populate: ['asientos'] }
+      );
       const pelicula = await em.findOneOrFail(Pelicula, { 
         _id: ObjectId.createFromHexString(peliculaId.toString()) 
       });
@@ -128,22 +129,23 @@ async function update(req: Request, res: Response) {
 }
 
 async function remove(req: Request, res: Response) {
-  try {
-    const em = orm.em.fork();
-    await em.begin();
+  const em = orm.em.fork();
+  await em.begin();
 
+  try {
     const funcion = await em.findOneOrFail(
       Funcion,
       { _id: new ObjectId(req.params.id) },
-      { populate: ['entradas'] } 
+      { populate: ['entradas', 'asientosFuncion'] } 
     );
 
     funcion.entradas.getItems().forEach(entrada => em.remove(entrada));
+    funcion.asientosFuncion.getItems().forEach(asientoFuncion => em.remove(asientoFuncion));
 
     await em.removeAndFlush(funcion);
     await em.commit();
 
-    res.status(200).json({ message: "Función y entradas relacionadas eliminadas" });
+    res.status(200).json({ message: "Función, entradas y asientos relacionados eliminados" });
   } catch (error: any) {
     await em.rollback();
     res.status(500).json({ message: error.message });

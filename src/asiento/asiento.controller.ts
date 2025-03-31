@@ -3,7 +3,6 @@ import { Asiento } from "./asiento.entity.js";
 import { orm } from "../shared/db/orm.js";
 import { ObjectId } from "@mikro-orm/mongodb";
 import { Sala } from "../sala/sala.entity.js";
-import { AsientoFuncion, EstadoAsiento } from "../asientoFuncion/asientoFuncion.entity.js";
 
 const em = orm.em;
 
@@ -20,24 +19,6 @@ function sanitizeAsientoInput(req: Request, res: Response, next: NextFunction) {
     }
   });
   next();
-}
-
-async function checkAvailability(req: Request, res: Response) {
-  try {
-    const funcionId = ObjectId.createFromHexString(req.params.funcionId);
-    const asientosFuncion = await orm.em.find(AsientoFuncion, { funcion: funcionId }, { populate: ['asiento'] });
-    
-    const availability = asientosFuncion.map(af => ({
-      id: af.asiento.id,
-      fila: af.asiento.fila,
-      numero: af.asiento.numero,
-      isOccupied: af.estado !== EstadoAsiento.DISPONIBLE,
-    }));
-    
-    res.status(200).json({ data: availability });
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
 }
 
 async function findAll(req: Request, res: Response) {
@@ -106,4 +87,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { sanitizeAsientoInput, findAll, findOne, add, update, remove, checkAvailability };
+export { sanitizeAsientoInput, findAll, findOne, add, update, remove };

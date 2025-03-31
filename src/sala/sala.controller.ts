@@ -82,18 +82,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-async function getAsientos(req: Request, res: Response) {
-  try {
-    const id = req.params.id;
-    const sala = await em.findOneOrFail(
-      Sala,
-      { _id: new ObjectId(id) },
-      { populate: ['asientos'] }
-    );
-    res.status(200).json({ message: "Found asientos", data: sala.asientos.getItems() });
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-}
-
-export { sanitizeSalaInput, findAll, findOne, add, update, remove, getAsientos };
+export { sanitizeSalaInput, findAll, findOne, add, update, remove };

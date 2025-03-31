@@ -75,8 +75,8 @@ async function add(req: Request, res: Response) {
       const funcion = await em.findOneOrFail(Funcion, { _id: ObjectId.createFromHexString(funcionId) });
       
       const asientoFuncion = await em.findOne(AsientoFuncion, {
+        _id: ObjectId.createFromHexString(asientoId),
         funcion,
-        asiento: { _id: ObjectId.createFromHexString(asientoId) }
       });
       
       if (!asientoFuncion) {

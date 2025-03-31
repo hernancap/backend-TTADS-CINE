@@ -3,7 +3,7 @@ import { BaseEntity } from "../shared/db/baseEntity.entity.js";
 import { Sala } from "../sala/sala.entity.js";
 import { Pelicula } from "../pelicula/pelicula.entity.js";
 import { Entrada } from "../entrada/entrada.entity.js";
-import { AsientoFuncion } from "../asientoFuncion/asientoFuncion.entity.js"; // Importa la nueva entidad
+import { AsientoFuncion } from "../asientoFuncion/asientoFuncion.entity.js";
 
 @Entity()
 export class Funcion extends BaseEntity {

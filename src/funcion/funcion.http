@@ -41,7 +41,3 @@ Content-Type: application/json
 
 ### Eliminar una función
 DELETE {{baseUrl}}/{{funcionId}}
-
-### Cancelar una función
-POST {{baseUrl}}/{{funcionId}}/cancel
-Content-Type: application/json
