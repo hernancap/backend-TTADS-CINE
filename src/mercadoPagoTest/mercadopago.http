@@ -12,3 +12,37 @@ Content-Type: application/json
     }
   ]
 }
+
+### TEST 2
+POST http://localhost:3000/api/mercadopago/webhook
+Content-Type: application/json
+
+{
+  "action": "payment.created",
+  "api_version": "v1",
+  "data": {
+    "id": "1334344023"
+  },
+  "date_created": "2025-04-04T22:10:28Z",
+  "id": 120356949616,
+  "live_mode": false,
+  "type": "payment",
+  "user_id": "726668558"
+}
+
+### TEST 3
+POST https://mink-willing-finally.ngrok-free.app/api/mercadopago/webhook
+Content-Type: application/json
+
+{
+  "action": "payment.created",
+  "api_version": "v1",
+  "data": {
+    "id": "1334344023"
+  },
+  "date_created": "2025-04-04T22:10:28Z",
+  "id": 120356949616,
+  "live_mode": false,
+  "type": "payment",
+  "user_id": "726668558"
+}

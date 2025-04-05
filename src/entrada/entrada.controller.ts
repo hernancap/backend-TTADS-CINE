@@ -4,8 +4,7 @@ import { orm } from "../shared/db/orm.js";
 import { ObjectId } from "@mikro-orm/mongodb";
 import { Usuario } from "../usuario/usuario.entity.js";
 import { Funcion } from "../funcion/funcion.entity.js";
-import { AsientoFuncion, EstadoAsiento } from "../asientoFuncion/asientoFuncion.entity.js";
-import { Cupon } from "../cupon/cupon.entity.js";
+import { crearEntrada } from "../services/entrada.service.js";
 
 const em = orm.em;
 
@@ -25,22 +24,6 @@ function sanitizeEntradaInput(req: Request, res: Response, next: NextFunction) {
   });
 
   next();
-}
-
-async function checkCupon(em: typeof orm.em, usuario: Usuario): Promise<void> {
-  const entradasCount = await em.count(Entrada, { usuario });
-  if (entradasCount % 5 === 0) {
-    const codigo = "codigoCupon";
-    const fechaExpiracion = new Date();
-    fechaExpiracion.setMonth(fechaExpiracion.getMonth() + 1);
-    const newCoupon = em.create(Cupon, {
-      codigo: codigo,
-      descuento: 10, 
-      fechaExpiracion: fechaExpiracion,
-      usuario,
-    });
-    await em.persistAndFlush(newCoupon);
-  }
 }
 
 async function findAll(req: Request, res: Response) {
@@ -66,52 +49,25 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
-async function add(req: Request, res: Response) {
+async function add(req: Request, res: Response, next: NextFunction) {
   try {
-    const nuevaEntrada = await orm.em.fork().transactional(async (em) => {
-      const { usuario: usuarioId, funcion: funcionId, asiento: asientoId, precio } = req.body.sanitizedInput;
-      
-      const usuario = await em.findOneOrFail(Usuario, { _id: ObjectId.createFromHexString(usuarioId) });
-      const funcion = await em.findOneOrFail(Funcion, { _id: ObjectId.createFromHexString(funcionId) });
-      
-      const asientoFuncion = await em.findOne(AsientoFuncion, {
-        _id: ObjectId.createFromHexString(asientoId),
-        funcion,
-      });
-      
-      if (!asientoFuncion) {
-        throw new Error('El asiento no existe en esta función');
-      }
-      
-      if (asientoFuncion.estado !== EstadoAsiento.DISPONIBLE) {
-        throw new Error('El asiento ya está ocupado para esta función');
-      }
-
-      const entrada = em.create(Entrada, {
-        precio,
-        usuario,
-        funcion,
-        asientoFuncion, 
-        fechaCompra: new Date()
-      });
-      
-      asientoFuncion.estado = EstadoAsiento.VENDIDO;
-      
-      await em.persistAndFlush(entrada);
-
-      await checkCupon(em, usuario);
-
-      return entrada;
+    const { usuario: usuarioId, funcion: funcionId, asiento: asientoId, precio } = req.body.sanitizedInput;
+    
+    const nuevaEntrada = await crearEntrada({
+      usuarioId,
+      funcionId,
+      asientoId,
+      precio,
     });
     
     res.status(201).json({
       message: "Entrada creada exitosamente",
-      data: nuevaEntrada
+      data: nuevaEntrada,
     });
   } catch (error: any) {
     res.status(500).json({
       message: error.message,
-      error: "Error al crear la entrada"
+      error: "Error al crear la entrada",
     });
   }
 }

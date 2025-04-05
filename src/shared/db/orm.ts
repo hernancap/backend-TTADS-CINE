@@ -11,5 +11,5 @@ export const orm = await MikroORM.init({
     driver: MongoDriver,
     clientUrl: `mongodb+srv://hernancaparros:${process.env.MONGODB_PASSWORD}@cluster0.jlbuugw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
     highlighter: new MongoHighlighter(),
-    debug: true,
+//    debug: true,
 })
