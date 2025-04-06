@@ -16,4 +16,7 @@ export class Cupon extends BaseEntity {
   @ManyToOne(() => Usuario)
   usuario!: Rel<Usuario>;
   
+  @Property({ default: false })
+  usado: boolean = false;
+
 }

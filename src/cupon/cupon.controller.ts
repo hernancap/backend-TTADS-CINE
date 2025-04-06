@@ -27,7 +27,7 @@ async function findOne(req: Request, res: Response) {
 async function findByUser(req: Request, res: Response) {
   try {
     const { userId } = req.params;
-    const cupones = await em.find(Cupon, { usuario: new ObjectId(userId) });
+    const cupones = await em.find(Cupon, { usuario: new ObjectId(userId), usado: false });
     res.status(200).json({ message: "Cupones del usuario encontrados", data: cupones });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -45,6 +45,7 @@ async function add(req: Request, res: Response) {
       descuento,
       fechaExpiracion: new Date(fechaExpiracion),
       usuario,
+      usado: false,
     });
     await em.flush();
     res.status(201).json({ message: "Cupón creado", data: cupon });

@@ -1,0 +1,1 @@
+npx ngrok http --authtoken=TU_AUTHTOKEN --url=mink-willing-finally.ngrok-free.app 3000

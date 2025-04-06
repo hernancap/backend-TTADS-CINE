@@ -63,6 +63,7 @@ async function checkCupon(em: typeof orm.em, usuario: Usuario): Promise<void> {
       descuento: 10,
       fechaExpiracion: fechaExpiracion,
       usuario,
+      usado: false,
     });
     await em.persistAndFlush(newCoupon);
     console.log("Cupón creado:", newCoupon);
