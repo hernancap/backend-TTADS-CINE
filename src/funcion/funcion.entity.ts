@@ -1,9 +1,14 @@
-import { Entity, Property, ManyToOne, OneToMany, Collection, Rel, Cascade } from "@mikro-orm/core";
+import { Entity, Property, ManyToOne, OneToMany, Collection, Rel, Cascade, Enum } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/db/baseEntity.entity.js";
 import { Sala } from "../sala/sala.entity.js";
 import { Pelicula } from "../pelicula/pelicula.entity.js";
 import { Entrada } from "../entrada/entrada.entity.js";
 import { AsientoFuncion } from "../asientoFuncion/asientoFuncion.entity.js";
+
+export enum TipoFuncion {
+  SUBTITULADA = "SUBTITULADA",
+  DOBLADA = "DOBLADA / ESPAÑOL",
+}
 
 @Entity()
 export class Funcion extends BaseEntity {
@@ -30,4 +35,7 @@ export class Funcion extends BaseEntity {
 
     @Property({ nullable: false })
     precio!: number;
+
+    @Enum({ items: () => TipoFuncion, default: TipoFuncion.SUBTITULADA })
+    tipo!: TipoFuncion;
 }

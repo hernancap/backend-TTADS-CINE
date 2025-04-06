@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Funcion } from "./funcion.entity.js";
+import { Funcion, TipoFuncion } from "./funcion.entity.js";
 import { orm } from "../shared/db/orm.js";
 import { ObjectId } from "@mikro-orm/mongodb";
 import { Sala } from "../sala/sala.entity.js";
@@ -14,6 +14,7 @@ function sanitizeFuncionInput(req: Request, res: Response, next: NextFunction) {
       sala: req.body.sala,
       pelicula: req.body.pelicula,
       precio: Number(req.body.precio),
+      tipo: req.body.tipo, 
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -118,6 +119,10 @@ async function update(req: Request, res: Response) {
       const peliculaId = ObjectId.createFromHexString(req.body.sanitizedInput.pelicula);
       const pelicula = await em.findOneOrFail(Pelicula, { _id: peliculaId });
       req.body.sanitizedInput.pelicula = pelicula;
+    }
+
+    if (req.body.sanitizedInput.tipo) { 
+      funcionToUpdate.tipo = req.body.sanitizedInput.tipo as TipoFuncion;
     }
 
     em.assign(funcionToUpdate, req.body.sanitizedInput);
