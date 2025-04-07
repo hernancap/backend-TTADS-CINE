@@ -36,19 +36,25 @@ export const handlePaymentNotification = async (req: Request, res: Response) => 
     const paymentData = await response.json();
 
     if (paymentData.status === "approved") {
-      const { user_id, funcion_id, asiento_ids, unit_price } = paymentData.metadata;
+      const { user_id, funcion_id, asientos_funcion_ids, unit_price } = paymentData.metadata;
+      const pago_id = paymentData.id;
+      const pago_fecha = new Date(paymentData.date_approved);
+      const pago_metodo = paymentData.payment_method_id;
 
-      for (const seatId of asiento_ids) {
+      for (const asiento_funcion_id of asientos_funcion_ids) {
         try {
           const entrada = await crearEntrada({
             usuarioId: user_id,
             funcionId: funcion_id,
-            asientoId: seatId,
+            asiento_funcion_id: asiento_funcion_id,
             precio: unit_price,
+            pago_id: pago_id,
+            pago_fecha: pago_fecha,
+            pago_metodo: pago_metodo,
           });
-          console.log(`Entrada creada para asiento ${seatId}:`, entrada);
+          console.log(`Entrada creada para asiento_funcion ${asiento_funcion_id}`, entrada);
         } catch (error) {
-          console.error(`Error creando entrada para asiento ${seatId}:`, error);
+          console.error(`Error creando entrada para asiento ${asiento_funcion_id}:`, error);
         }
       }
       console.log("Entradas creadas correctamente después del pago aprobado.");

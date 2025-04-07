@@ -9,22 +9,27 @@ import { Cupon } from "../cupon/cupon.entity.js";
 export async function crearEntrada({
   usuarioId,
   funcionId,
-  asientoId,
+  asiento_funcion_id,
   precio,
-  usada, 
+  pago_id,
+  pago_fecha,
+  pago_metodo
 }: {
   usuarioId: string;
   funcionId: string;
-  asientoId: string;
+  asiento_funcion_id: string;
   precio: number;
-  usada?: boolean; 
+  usada?: boolean;
+  pago_id?: string;
+  pago_fecha?: Date;
+  pago_metodo?: string;
 }) {
   return await orm.em.fork().transactional(async (em) => {
     const usuario = await em.findOneOrFail(Usuario, { _id: ObjectId.createFromHexString(usuarioId) });
     const funcion = await em.findOneOrFail(Funcion, { _id: ObjectId.createFromHexString(funcionId) });
     
     const asientoFuncion = await em.findOne(AsientoFuncion, {
-      _id: ObjectId.createFromHexString(asientoId),
+      _id: ObjectId.createFromHexString(asiento_funcion_id),
       funcion,
     });
     
@@ -43,6 +48,9 @@ export async function crearEntrada({
       asientoFuncion,
       fechaCompra: new Date(),
       usada: false,
+      pago_id,
+      pago_fecha,
+      pago_metodo
     });
     
     asientoFuncion.estado = EstadoAsiento.VENDIDO;

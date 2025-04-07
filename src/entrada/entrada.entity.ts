@@ -23,4 +23,13 @@ export class Entrada extends BaseEntity {
 
   @Property({ default: false })
   usada: boolean = false;
+
+  @Property({ nullable: true })
+  pago_id?: string;
+
+  @Property({ nullable: true })
+  pago_fecha?: Date;
+
+  @Property({ nullable: true })
+  pago_metodo?: string;
 }

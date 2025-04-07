@@ -14,7 +14,7 @@ export const MercadoPagoService = {
     items: { id: string; title: string; quantity: number; unit_price: number }[], 
     user_id: string,
     funcion_id: string,
-    asiento_ids: string[]
+    asientos_funcion_ids: string[]
   ) {
     try {
       const response = await preference.create({
@@ -23,13 +23,12 @@ export const MercadoPagoService = {
           metadata: {
             user_id,
             funcion_id,
-            asiento_ids,
+            asientos_funcion_ids,
             unit_price: items[0].unit_price
           },
           back_urls: {
             success: 'http://localhost:5173/pago-exitoso',
             failure: 'http://localhost:5173/pago-fallido',
-            pending: 'http://localhost:5173/pago-pendiente',
           },
           auto_return: 'approved',
           notification_url: 'https://mink-willing-finally.ngrok-free.app/api/mercadopago/webhook', 

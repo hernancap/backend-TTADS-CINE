@@ -84,12 +84,12 @@ async function findOne(req: Request, res: Response) {
 
 async function add(req: Request, res: Response, next: NextFunction) {
   try {
-    const { usuario: usuarioId, funcion: funcionId, asiento: asientoId, precio } = req.body.sanitizedInput;
+    const { usuario: usuarioId, funcion: funcionId, asiento: asiento_funcion_id, precio } = req.body.sanitizedInput;
     
     const nuevaEntrada = await crearEntrada({
       usuarioId,
       funcionId,
-      asientoId,
+      asiento_funcion_id,
       precio,
     });
     
