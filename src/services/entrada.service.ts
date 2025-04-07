@@ -11,11 +11,13 @@ export async function crearEntrada({
   funcionId,
   asientoId,
   precio,
+  usada, 
 }: {
   usuarioId: string;
   funcionId: string;
   asientoId: string;
   precio: number;
+  usada?: boolean; 
 }) {
   return await orm.em.fork().transactional(async (em) => {
     const usuario = await em.findOneOrFail(Usuario, { _id: ObjectId.createFromHexString(usuarioId) });
@@ -40,6 +42,7 @@ export async function crearEntrada({
       funcion,
       asientoFuncion,
       fechaCompra: new Date(),
+      usada: false,
     });
     
     asientoFuncion.estado = EstadoAsiento.VENDIDO;

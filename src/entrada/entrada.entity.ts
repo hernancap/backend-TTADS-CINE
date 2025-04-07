@@ -20,4 +20,7 @@ export class Entrada extends BaseEntity {
 
   @ManyToOne(() => AsientoFuncion, { nullable: false })
   asientoFuncion!: Rel<AsientoFuncion>;
+
+  @Property({ default: false })
+  usada: boolean = false;
 }

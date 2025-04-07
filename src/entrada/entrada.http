@@ -7,6 +7,9 @@ GET http://localhost:3000/api/entradas
 ### Obtener una entrada por ID
 GET http://localhost:3000/api/entradas/{{id}}
 
+### Obtener reporte
+GET http://localhost:3000/api/entradas/reporteEntradasPorPelicula
+
 ### Crear una nueva entrada
 POST http://localhost:3000/api/entradas
 Content-Type: application/json

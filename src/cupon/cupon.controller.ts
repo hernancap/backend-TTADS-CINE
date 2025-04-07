@@ -58,10 +58,11 @@ async function update(req: Request, res: Response) {
   try {
     const id = req.params.id;
     const cupon = await em.findOneOrFail(Cupon, { _id: new ObjectId(id) });
-    const { codigo, descuento, fechaExpiracion } = req.body;
-    if (codigo) cupon.codigo = codigo;
-    if (descuento) cupon.descuento = descuento;
-    if (fechaExpiracion) cupon.fechaExpiracion = new Date(fechaExpiracion);
+    const { codigo, descuento, fechaExpiracion, usado } = req.body;
+    if (codigo) { cupon.codigo = codigo };
+    if (descuento) { cupon.descuento = descuento };
+    if (fechaExpiracion) { cupon.fechaExpiracion = new Date(fechaExpiracion)} ;
+    if (typeof usado === 'boolean') {cupon.usado = usado};
     await em.flush();
     res.status(200).json({ message: "Cupón actualizado", data: cupon });
   } catch (error: any) {

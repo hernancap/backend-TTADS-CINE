@@ -14,7 +14,8 @@ function sanitizeEntradaInput(req: Request, res: Response, next: NextFunction) {
     fechaCompra: req.body.fechaCompra || new Date(),
     usuario: req.body.usuario, 
     funcion: req.body.funcion,
-    asiento: req.body.asiento
+    asiento: req.body.asiento,
+    usada: req.body.usada,
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -24,6 +25,38 @@ function sanitizeEntradaInput(req: Request, res: Response, next: NextFunction) {
   });
 
   next();
+}
+
+async function reporteEntradasPorPelicula(req: Request, res: Response) {
+  try {
+      const sieteDiasAtras = new Date();
+      sieteDiasAtras.setDate(sieteDiasAtras.getDate() - 7);
+      sieteDiasAtras.setHours(0, 0, 0, 0);
+
+      const entradasUltimos7Dias = await em.find(Entrada, {
+            fechaCompra: { $gte: sieteDiasAtras },
+        }, { populate: ['funcion.pelicula'] });
+
+      const ventasPorPelicula: { [nombre: string]: number } = {};
+
+      for (const entrada of entradasUltimos7Dias) {
+        if (entrada.funcion && entrada.funcion.pelicula) {
+            const nombrePelicula = entrada.funcion.pelicula.nombre;
+            ventasPorPelicula[nombrePelicula] = (ventasPorPelicula[nombrePelicula] || 0) + 1;
+        }
+      }
+
+      const resultados = Object.entries(ventasPorPelicula)
+            .map(([pelicula, cantidad]) => ({ pelicula, cantidad }))
+            .sort((a, b) => b.cantidad - a.cantidad); 
+
+      res.status(200).json({
+          message: "Número de entradas vendidas por película en los últimos 7 días",
+          data: resultados,
+      });
+  } catch (error: any) {
+      res.status(500).json({ message: error.message });
+  }
 }
 
 async function findAll(req: Request, res: Response) {
@@ -89,6 +122,10 @@ async function update(req: Request, res: Response) {
       req.body.sanitizedInput.funcion = funcion;
     }
 
+    if (typeof req.body.sanitizedInput.usada === 'boolean') {
+      entradaToUpdate.usada = req.body.sanitizedInput.usada;
+    }
+
     em.assign(entradaToUpdate, req.body.sanitizedInput);
     await em.flush();
     res.status(200).json({ message: "Entrada updated", data: entradaToUpdate });
@@ -114,4 +151,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { sanitizeEntradaInput, findAll, findOne, add, update, remove };
+export { sanitizeEntradaInput, findAll, findOne, add, update, remove, reporteEntradasPorPelicula };
