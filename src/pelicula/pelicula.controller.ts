@@ -15,9 +15,11 @@ function sanitizePeliculaInput(req: Request, res: Response, next: NextFunction){
         genero: req.body.genero,
         duracion: req.body.duracion,
         director: req.body.director,
+        calificacion: req.body.calificacion,
         actors: actors,
         enCartelera: req.body.enCartelera === 'true',
         proximamente: req.body.proximamente === 'true',
+        sinopsis: req.body.sinopsis,
     }
     Object.keys(req.body.sanitizedInput).forEach(key=>{
         if(req.body.sanitizedInput[key] === undefined){

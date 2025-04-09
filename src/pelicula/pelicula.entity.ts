@@ -1,7 +1,14 @@
-import { Entity, Property, ManyToMany, Collection } from "@mikro-orm/core";
+import { Entity, Property, ManyToMany, Collection, Enum } from "@mikro-orm/core";
 import { BaseEntity } from "../shared/db/baseEntity.entity.js";
 import { Actor } from "../actor/actor.entity.js";
 import { Usuario } from "../usuario/usuario.entity.js";
+
+export enum Calificacion {
+	ATP = "ATP",
+	M13 = "+13",
+	M16 = "+16",
+	M18 = "+18",
+}
 
 @Entity()
 export class Pelicula extends BaseEntity {
@@ -32,5 +39,11 @@ export class Pelicula extends BaseEntity {
 	usuariosFavoritos = new Collection<Usuario>(this);
 
     @Property({ nullable: true })
-    poster_path?: string; 
+    poster_path?: string;
+
+	@Enum(() => Calificacion)
+  	calificacion!: Calificacion;
+
+	@Property({ nullable: true })
+	sinopsis?: string;
 }
