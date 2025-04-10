@@ -49,13 +49,13 @@ async function login(req: Request, res: Response) {
 	  });
   
 	  if (!usuario) {
-		return res.status(401).json({ message: "Credenciales inválidas" });
+		return res.status(401).json({ message: "Mail o contraseña incorrectos" });
 	  }
   
 	  const passwordMatch = await bcrypt.compare(password, usuario.password);
   
 	  if (!passwordMatch) {
-		return res.status(401).json({ message: "Credenciales inválidas" });
+		return res.status(401).json({ message: "Mail o contraseña incorrectos" });
 	  }
   
 	  const token = jwt.sign(
@@ -102,9 +102,7 @@ async function login(req: Request, res: Response) {
 				'entradas.funcion', 
 				'entradas.funcion.sala', 
 				'entradas.funcion.pelicula', 
-				'entradas.asientoFuncion', 
 				'entradas.asientoFuncion.asiento', 
-				'entradas.asientoFuncion.asiento.sala',
 				'cupones',
 				'favoritos',
 			]
@@ -118,26 +116,20 @@ async function login(req: Request, res: Response) {
 		precio: entrada.precio,
 		fechaCompra: entrada.fechaCompra,
 		funcion: {
-		  id: entrada.funcion.id,
 		  fechaHora: entrada.funcion.fechaHora,
 		  precio: entrada.funcion.precio,
 		  sala: entrada.funcion.sala ? {
-			id: entrada.funcion.sala.id,
 			nombre: entrada.funcion.sala.nombre
 		  } : null,
 		  pelicula: {
-			id: entrada.funcion.pelicula.id,
 			nombre: entrada.funcion.pelicula.nombre,
 			duracion: entrada.funcion.pelicula.duracion
 		  }
 		},
-		asiento: {
-			id: entrada.asientoFuncion.asiento.id,
-			fila: entrada.asientoFuncion.asiento.fila,
-			numero: entrada.asientoFuncion.asiento.numero,
-	  		sala: entrada.asientoFuncion.asiento.sala ? {
-		    	id: entrada.asientoFuncion.asiento.sala.id,
-		    	nombre: entrada.asientoFuncion.asiento.sala.nombre
+		asientoFuncion: {
+	  		asiento: entrada.asientoFuncion.asiento ? {
+		    	fila: entrada.asientoFuncion.asiento.fila,
+		    	numero: entrada.asientoFuncion.asiento.numero
 			} : null
 		}
 	  }));
