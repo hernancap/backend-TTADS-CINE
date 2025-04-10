@@ -42,6 +42,10 @@ Content-Type: application/json
     ]
 }
 
+
+### REPORTE
+GET http://localhost:3000/api/peliculas/reportes/favoritos
+
 ### modificar movie (PATCH - recurso parcial)
 PATCH http://localhost:3000/api/peliculas/{{id}}
 Content-Type: application/json

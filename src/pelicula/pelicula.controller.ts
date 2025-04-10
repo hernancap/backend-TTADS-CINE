@@ -125,4 +125,31 @@ async function remove(req: Request, res: Response) {
     }
 }
 
-export {sanitizePeliculaInput, findAll, findOne, add, update, remove}
+async function reporteFavoritos(req: Request, res: Response) {
+  const em = orm.em.fork();
+	try {
+		const peliculas = await em.find(Pelicula, {
+      proximamente: true,
+    }, {
+      populate: ['usuariosFavoritos'],
+    });
+    
+    const resultado = peliculas
+      .filter(p => p.usuariosFavoritos.length > 0)
+      .map(p => ({
+        id: p.id,
+        nombre: p.nombre,
+        cantidadFavoritos: p.usuariosFavoritos.length,
+      }));
+
+		res.status(200).json({
+			message: "Películas favoritas por usuarios",
+			data: resultado,
+		});
+	} catch (error: any) {
+		console.error("Error generando reporte de favoritos:", error);
+		res.status(500).json({ message: "Error generando reporte de favoritos" });
+	}
+}
+
+export {sanitizePeliculaInput, findAll, findOne, add, update, remove, reporteFavoritos}
