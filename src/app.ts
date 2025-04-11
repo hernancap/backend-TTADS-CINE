@@ -13,9 +13,7 @@ import { usuarioRouter } from './usuario/usuario.routes.js'
 import { cuponRouter } from './cupon/cupon.routes.js'
 import { asientoFuncionRouter } from './asientoFuncion/asientoFuncion.routes.js'
 import dotenv from 'dotenv'
-
 import { mercadoPagorouter } from './mercadoPagoTest/mercadopago.routes.js'
-
 
 const app = express()
 

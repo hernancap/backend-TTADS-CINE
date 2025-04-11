@@ -67,15 +67,64 @@ async function add(req: Request, res: Response) {
         _id: ObjectId.createFromHexString(peliculaId.toString()) 
       });
 
-      const funcionesExistentes = await em.find(Funcion, {
-        sala,
-        fechaHora: {
-          $gte: new Date(rest.fechaHora.getTime() - 2 * 60 * 60 * 1000),
-          $lte: new Date(rest.fechaHora.getTime() + 2 * 60 * 60 * 1000)
+      const nuevaFechaHora = rest.fechaHora;
+      const inicioDia = new Date(nuevaFechaHora);
+      inicioDia.setHours(0, 0, 0, 0);
+      const finDia = new Date(nuevaFechaHora);
+      finDia.setHours(23, 59, 59, 999);
+
+      const funcionAnterior = await em.findOne(
+        Funcion,
+        {
+          sala,
+          fechaHora: {
+            $gte: inicioDia,
+            $lt: nuevaFechaHora
+          }
+        },
+        {
+          orderBy: { fechaHora: 'DESC' },
+          populate: ['pelicula']
         }
-      });
-      if (funcionesExistentes.length > 0) {
-        throw new Error('Ya existe una función programada en esta sala en un horario cercano');
+      );
+
+      const funcionSiguiente = await em.findOne(
+        Funcion,
+        {
+          sala,
+          fechaHora: {
+            $gt: nuevaFechaHora,
+            $lte: finDia
+          }
+        },
+        {
+          orderBy: { fechaHora: 'ASC' },
+          populate: ['pelicula']
+        }
+      );
+
+      const duracionPeliculaNueva = pelicula.duracion * 60 * 1000;
+      const finFuncionNueva = new Date(nuevaFechaHora.getTime() + duracionPeliculaNueva);
+
+      if (funcionAnterior) {
+        const finFuncionAnterior = new Date(
+          funcionAnterior.fechaHora.getTime() + 
+          funcionAnterior.pelicula.duracion * 60 * 1000
+        );
+        
+        if (nuevaFechaHora < finFuncionAnterior) {
+          throw new Error(
+            `Conflicto con función anterior que termina a ${finFuncionAnterior.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`
+          );
+        }
+      }
+
+      if (funcionSiguiente) {
+        if (finFuncionNueva > funcionSiguiente.fechaHora) {
+          throw new Error(
+            `Conflicto con función siguiente que inicia a ${funcionSiguiente.fechaHora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })}`
+);
+        }
       }
 
       const nuevaFuncion = em.create(Funcion, {
@@ -100,7 +149,10 @@ async function add(req: Request, res: Response) {
       message: "Función creada exitosamente"
     });
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({
+      error: true,
+      message: error.message || 'Error al crear la función'
+    });
   }
 }
 

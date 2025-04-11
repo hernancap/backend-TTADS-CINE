@@ -66,7 +66,7 @@ export async function crearEntrada({
 async function checkCupon(em: typeof orm.em, usuario: Usuario): Promise<void> {
   const entradasCount = await em.count(Entrada, { usuario });
   if (entradasCount % 5 === 0) {
-    const codigo = "codigoCupon";
+    const codigo = "CuponCliente";
     const fechaExpiracion = new Date();
     fechaExpiracion.setMonth(fechaExpiracion.getMonth() + 1);
     const newCoupon = em.create(Cupon, {
