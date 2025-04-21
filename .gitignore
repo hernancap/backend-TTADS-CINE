@@ -3,6 +3,8 @@ coverage
 
 # API keys and secrets
 .env
+.env.production
+.env.development
 
 # dependency directory
 node_modules

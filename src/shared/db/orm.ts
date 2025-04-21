@@ -1,8 +1,7 @@
+import 'dotenv/config'; 
 import { MikroORM } from "@mikro-orm/core"
 import { MongoHighlighter } from "@mikro-orm/mongo-highlighter"
 import { MongoDriver } from "@mikro-orm/mongodb"
-import 'dotenv/config'; 
-
 
 export const orm = await MikroORM.init({
     entities: ['dist/**/*.entity.js'],
