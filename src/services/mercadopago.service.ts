@@ -1,13 +1,17 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import 'dotenv/config'; 
+import { env } from '../config/env.js';
 
-const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;
+const accessToken = env.mercadopago.accessToken;
 if (!accessToken) {
   throw new Error('La variable de entorno MERCADOPAGO_ACCESS_TOKEN no está definida');
 }
 
 const client = new MercadoPagoConfig({ accessToken });
 const preference = new Preference(client);
+
+const webhookUrl = env.nodeEnv === 'production' ? 
+`${process.env.RENDER_EXTERNAL_URL || 'https://backend-ttads-cine.onrender.com'}/api/mercadopago/webhook`
+  : 'https://mink-willing-finally.ngrok-free.app/api/mercadopago/webhook';
 
 export const MercadoPagoService = {
   async createPreference(
@@ -27,11 +31,11 @@ export const MercadoPagoService = {
             unit_price: items[0].unit_price
           },
           back_urls: {
-            success: 'http://localhost:5173/pago-exitoso',
-            failure: 'http://localhost:5173/pago-fallido',
+            success: `${env.frontend.url}/pago-exitoso`,
+            failure: `${env.frontend.url}/pago-fallido`,
           },
           auto_return: 'approved',
-          notification_url: 'https://mink-willing-finally.ngrok-free.app/api/mercadopago/webhook', 
+          notification_url: webhookUrl, 
         },
       });
       return response;

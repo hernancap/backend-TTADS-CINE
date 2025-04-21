@@ -1,4 +1,3 @@
-import 'dotenv/config'; 
 import { MikroORM } from "@mikro-orm/core"
 import { MongoHighlighter } from "@mikro-orm/mongo-highlighter"
 import { MongoDriver } from "@mikro-orm/mongodb"

@@ -1,8 +1,3 @@
-import dotenv from 'dotenv'
-const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-dotenv.config({ path: `.env.${mode}` });
-console.log(`Cargando variables de entorno de .env.${mode}`);
-
 import 'reflect-metadata'
 import express from 'express'
 import { peliculaRouter } from './pelicula/pelicula.routes.js'
@@ -18,14 +13,12 @@ import { usuarioRouter } from './usuario/usuario.routes.js'
 import { cuponRouter } from './cupon/cupon.routes.js'
 import { asientoFuncionRouter } from './asientoFuncion/asientoFuncion.routes.js'
 import { mercadoPagorouter } from './mercadoPagoTest/mercadopago.routes.js'
+import { env } from './config/env.js';
 
 const app = express()
 
-
-const frontendUrl = process.env.FRONTEND_URL || (mode === 'production' ? 'https://frontend-ttads-cine.onrender.com' : 'http://localhost:5173');
-
 app.use(cors({
-    origin: frontendUrl, 
+    origin: env.frontend.url, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true 
@@ -55,6 +48,6 @@ app.use((_, res)=>{
 })
 
 app.listen(3000, ()=>{
-    const serverAddress = process.env.RENDER_EXTERNAL_URL || `http://localhost:${process.env.PORT || 3000}/`;
+    const serverAddress = process.env.RENDER_EXTERNAL_URL || `http://localhost:${env.port}/`;
     console.log(`Server running on ${serverAddress}`);
 })
