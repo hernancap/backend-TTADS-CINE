@@ -59,6 +59,53 @@ async function reporteEntradasPorPelicula(req: Request, res: Response) {
   }
 }
 
+async function marcarUsada(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const entrada = await em.findOneOrFail(
+      Entrada,
+      { _id: ObjectId.createFromHexString(id) },
+      { populate: ["funcion"] }
+    );
+
+    if (entrada.usada) {
+      return res.status(400).json({ 
+        message: "La entrada ya fue usada anteriormente", 
+        code: "USADA_ANTERIORMENTE" 
+      });
+    }
+
+    const ahora = new Date();
+    if (entrada.funcion.fechaHora < ahora) {
+      return res.status(400).json({ 
+        message: "La entrada ya expiró (la función ya pasó)", 
+        code: "EXPIRADA" 
+      });
+    }
+
+    entrada.usada = true;
+    await em.flush();
+
+    return res.status(200).json({
+      message: "Entrada marcada como usada correctamente",
+      data: { id: entrada.id, usada: entrada.usada }
+    });
+
+  } catch (error: any) {
+    if (error.name === "NotFoundError") {
+      return res.status(404).json({ 
+        message: "Entrada no encontrada", 
+        code: "NOT_FOUND" 
+      });
+    }
+    console.error("Error en marcarUsada:", error);
+    return res.status(500).json({ 
+      message: "Error interno al marcar entrada como usada", 
+      code: "INTERNAL_ERROR" 
+    });
+  }
+}
+
 async function findAll(req: Request, res: Response) {
   try {
     const entradas = await em.find(Entrada, {}, { populate: ["usuario", "funcion", "asientoFuncion"] });
@@ -151,4 +198,4 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { sanitizeEntradaInput, findAll, findOne, add, update, remove, reporteEntradasPorPelicula };
+export { sanitizeEntradaInput, findAll, findOne, add, update, remove, reporteEntradasPorPelicula, marcarUsada };

@@ -30,11 +30,11 @@ export const MercadoPagoService = {
             asientos_funcion_ids,
             unit_price: items[0].unit_price
           },
-          back_urls: {
-            success: `${env.frontend.url}/pago-exitoso`,
-            failure: `${env.frontend.url}/pago-fallido`,
-          },
-          auto_return: 'approved',
+//          back_urls: {
+//            success: `${env.frontend.url}/pago-exitoso`,
+//            failure: `${env.frontend.url}/pago-fallido`,
+//          },
+//          auto_return: 'approved',
           notification_url: webhookUrl, 
         },
       });
