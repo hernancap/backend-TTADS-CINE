@@ -133,11 +133,22 @@ async function login(req: Request, res: Response) {
 			} : null
 		}
 	  }));
+
+	  const ahora = new Date();
+      const cuponesValidos = usuario.cupones.getItems()
+      .filter(c => !c.usado && c.fechaExpiracion > ahora)
+      .map(c => ({
+        id: c.id,
+        codigo: c.codigo,
+        descuento: c.descuento,
+        fechaExpiracion: c.fechaExpiracion
+      }));
   
 	  const safeUser = {
 		...rest,
 		id: _id!.toString(), 
-		entradas: entradasFormateadas
+		entradas: entradasFormateadas,
+		cupones: cuponesValidos
 	  };
   
 	  res.status(200).json({

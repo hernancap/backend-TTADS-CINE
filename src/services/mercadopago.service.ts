@@ -18,7 +18,8 @@ export const MercadoPagoService = {
     items: { id: string; title: string; quantity: number; unit_price: number }[], 
     user_id: string,
     funcion_id: string,
-    asientos_funcion_ids: string[]
+    asientos_funcion_ids: string[],
+    cupon_id: string,
   ) {
     try {
       const response = await preference.create({
@@ -28,6 +29,7 @@ export const MercadoPagoService = {
             user_id,
             funcion_id,
             asientos_funcion_ids,
+            cupon_id,
             unit_price: items[0].unit_price
           },
 //          back_urls: {

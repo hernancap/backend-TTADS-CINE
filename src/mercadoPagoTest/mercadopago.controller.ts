@@ -1,21 +1,70 @@
 import { Request, Response } from 'express';
 import { MercadoPagoService } from '../services/mercadopago.service.js';
 import { crearEntrada } from '../services/entrada.service.js';
+import { Cupon } from '../cupon/cupon.entity.js';
+import { orm } from '../shared/db/orm.js';
+import { ObjectId } from "@mikro-orm/mongodb";
+
+const em = orm.em;
 
 export const createPreference = async (req: Request, res: Response) => {
+  let coupon: Cupon | undefined;
+
   try {
-    const { items, userId, funcionId, asientoIds } = req.body;
+    const { items, userId, funcionId, cuponId, asientoIds } = req.body;
 
     if (!items || !Array.isArray(items)) {
       return res.status(400).json({ error: 'El cuerpo de la petición debe incluir un array de items.' });
     }
 
-    const preference = await MercadoPagoService.createPreference(items, userId, funcionId, asientoIds);
+    if (cuponId) {
+      coupon = await em.findOneOrFail(
+        Cupon,
+        { _id: ObjectId.createFromHexString(cuponId) }
+      );
 
-    res.status(200).json({ message: "preferenceId creado", data: preference.id });
-  } catch (error) {
+      if (coupon.usado) {
+        return res.status(400).json({
+          message: 'Este cupón ya fue utilizado con anterioridad',
+          code: 'USADO_ANTERIORMENTE'
+        });
+      }
+
+      const ahora = new Date();
+      if (coupon.fechaExpiracion < ahora) {
+        return res.status(400).json({
+          message: 'El cupón está expirado',
+          code: 'EXPIRADO'
+        });
+      }
+
+      coupon.usado = true;
+      await em.flush();
+    }
+
+    const preference = await MercadoPagoService.createPreference(
+      items,
+      userId,
+      funcionId,
+      asientoIds,
+      cuponId
+    );
+
+    return res.status(200).json({ message: 'preferenceId creado', data: preference.id });
+
+  } catch (error: any) {
     console.error('Error al crear preferencia:', error);
-    res.status(500).json({ error: 'Error interno al crear preferencia' });
+
+    if (coupon) {
+      try {
+        coupon.usado = false;
+        await em.flush();
+      } catch (rollbackErr) {
+        console.error('Error al revertir el estado del cupón tras fallo de preferencia:', rollbackErr);
+      }
+    }
+
+    return res.status(500).json({ error: 'Error al crear preferencia' });
   }
 };
 
