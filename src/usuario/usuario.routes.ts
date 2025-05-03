@@ -6,8 +6,8 @@ export const usuarioRouter = Router();
 
 usuarioRouter.get("/", authenticate, authAdmin, findAll);
 usuarioRouter.get("/me", authenticate, getMe);
-usuarioRouter.get("/:id", findOne);
-usuarioRouter.post("/", sanitizeUsuarioInput, add);
+usuarioRouter.get("/:id", authenticate, authAdmin, findOne);
+usuarioRouter.post("/", sanitizeUsuarioInput, authenticate, authAdmin, add);
 usuarioRouter.put("/:id", sanitizeUsuarioInput, authenticate, authAdmin, update);
 usuarioRouter.patch("/:id", sanitizeUsuarioInput, authenticate, authAdmin, update);
 usuarioRouter.delete("/:id", authenticate, authAdmin, remove);
