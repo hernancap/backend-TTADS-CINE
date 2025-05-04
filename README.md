@@ -1,7 +1,7 @@
 # TP TTADS Cine
 Trabajo practico para la materia **Técnicas y Tecnologías Avanzadas de Desarrollo de Software** de la **Universidad Tecnológica Nacional (Facultad Regional Rosario)**
 
-Alumno: 40283 - **Hernán Caparros**
+Alumno: 40283 - **Caparros, Hernán** (hernancaparros@gmail.com)
 
 ## Breve descripción de la app
 Aplicación Web de un Cine en el que un usuario puede comprar entradas para las funciones de las películas que están en cartelera, así como también poder ver los detalles de las películas que se estrenarán en el futuro y poder agregarlas a favoritos en su perfil.
@@ -10,11 +10,17 @@ Por otro lado, los usuarios de tipo administrador, además de tener control tota
 
 La aplicación está desarrollada en **TypeScript**. Utiliza **Node.js** como entorno de ejecución y **Express** como framework web para construir APIs y manejar rutas. La seguridad se implementa mediante **JWT (JSON Web Tokens)**. Para interactuar con la base de datos de **MongoDB**, se usa **MikroORM** como ORM.
 
+## Proposal
+[Accede aquí a la Proposal del TP]
+
 ## Deploy de la aplicación
 https://backend-ttads-cine.onrender.com
 
 ## Repositorio del frontend
 https://github.com/hernancap/frontend-TTADS-CINE
+
+## Documentación  
+[Accede aquí a la documentación de la Aplicación](https://github.com/hernancap/backend-TTADS-CINE/tree/main/docs) 
 
 # Para instalación local:
 

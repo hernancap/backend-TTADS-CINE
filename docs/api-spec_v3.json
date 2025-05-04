@@ -28,7 +28,11 @@
     "/api/peliculas/reportes/favoritos": {
       "get": {
         "summary": "/api/peliculas/reportes/favoritos",
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       }
     },
@@ -45,7 +49,11 @@
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       },
       "put": {
@@ -501,7 +509,115 @@
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Found funcion"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "6817a6f8161d7f2785ddd02d"
+                        },
+                        "fechaHora": {
+                          "type": "string",
+                          "example": "2025-05-05T23:20:00.000Z"
+                        },
+                        "sala": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "67f8fef9fe3159465f3ad124"
+                            },
+                            "nombre": {
+                              "type": "string",
+                              "example": "Sala 2"
+                            }
+                          }
+                        },
+                        "pelicula": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "67ead6071c000e50611ae6ed"
+                            },
+                            "nombre": {
+                              "type": "string",
+                              "example": "Conclave"
+                            },
+                            "genero": {
+                              "type": "string",
+                              "example": "Drama"
+                            },
+                            "duracion": {
+                              "type": "number",
+                              "example": 124
+                            },
+                            "director": {
+                              "type": "string",
+                              "example": "Edward Berger"
+                            },
+                            "enCartelera": {
+                              "type": "boolean",
+                              "example": true
+                            },
+                            "proximamente": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "poster_path": {
+                              "type": "string",
+                              "example": "poster-1743443463223-570551928.png"
+                            },
+                            "calificacion": {
+                              "type": "string",
+                              "example": "+16"
+                            },
+                            "sinopsis": {
+                              "type": "string",
+                              "example": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia."
+                            },
+                            "actors": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "example": [
+                                "67ead5f71c000e50611ae6eb"
+                              ]
+                            }
+                          }
+                        },
+                        "precio": {
+                          "type": "number",
+                          "example": 300
+                        },
+                        "tipo": {
+                          "type": "string",
+                          "example": "SUBTITULADA"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       },
       "put": {
@@ -565,7 +681,11 @@
     "/api/entradas/reporteEntradasPorPelicula": {
       "get": {
         "summary": "/api/entradas/reporteEntradasPorPelicula",
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       }
     },
@@ -715,7 +835,87 @@
     "/api/usuarios/login": {
       "post": {
         "summary": "/api/usuarios/login",
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Login exitoso"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2MzgwOTE1LCJleHAiOjE3NDYzODQ1MTV9.YADRAA5tUmH0CX6_oShKP_yYBeUzX5MEDjhpINRDEqc"
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "67eacc0988ad0c52a7e3afcd"
+                            },
+                            "nombre": {
+                              "type": "string",
+                              "example": "hernan"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "asd2@test.com"
+                            },
+                            "tipo": {
+                              "type": "string",
+                              "example": "admin"
+                            },
+                            "entradas": {
+                              "type": "array",
+                              "items": {},
+                              "example": [
+                                null
+                              ]
+                            },
+                            "cupones": {
+                              "type": "array",
+                              "items": {},
+                              "example": [
+                                null
+                              ]
+                            },
+                            "favoritos": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              },
+                              "example": [
+                                {
+                                  "id": "67f5896785b98ff2964e2f85"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       }
     },
@@ -813,7 +1013,11 @@
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       }
     },
@@ -876,7 +1080,76 @@
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "funcion": {
+                            "type": "string"
+                          },
+                          "asiento": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "fila": {
+                                "type": "string"
+                              },
+                              "numero": {
+                                "type": "number"
+                              },
+                              "sala": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "estado": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "funcion",
+                          "asiento",
+                          "estado"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "6817a6f8161d7f2785ddd02e",
+                          "funcion": "6817a6f8161d7f2785ddd02d",
+                          "asiento": {
+                            "id": "67f8fef9fe3159465f3ad127",
+                            "fila": "A",
+                            "numero": 5,
+                            "sala": "67f8fef9fe3159465f3ad124"
+                          },
+                          "estado": "disponible"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       }
     }
