@@ -13,6 +13,122 @@
       "get": {
         "summary": "/api/peliculas",
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "found all peliculas"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "nombre": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "nombre"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "nombre",
+                          "genero",
+                          "duracion",
+                          "director",
+                          "enCartelera",
+                          "proximamente",
+                          "poster_path",
+                          "calificacion",
+                          "sinopsis",
+                          "actors"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "67ead6071c000e50611ae6ed",
+                          "nombre": "Conclave",
+                          "genero": "Drama",
+                          "duracion": 124,
+                          "director": "Edward Berger",
+                          "enCartelera": true,
+                          "proximamente": false,
+                          "poster_path": "poster-1743443463223-570551928.png",
+                          "calificacion": "+16",
+                          "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
+                          "actors": [
+                            {
+                              "id": "67ead5f71c000e50611ae6eb",
+                              "nombre": "Ralph Fiennes"
+                            },
+                            {
+                              "id": "67ead5fe1c000e50611ae6ec",
+                              "nombre": "Stanley Tucci"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "304": {
             "description": ""
           }
@@ -821,7 +937,24 @@
       },
       "post": {
         "summary": "/api/usuarios",
-        "responses": {},
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Acceso no autorizado"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       }
     },
