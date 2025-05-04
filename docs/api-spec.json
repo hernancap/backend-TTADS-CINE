@@ -17,120 +17,9 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "found all peliculas"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "nombre": {
-                        "type": "string"
-                      },
-                      "genero": {
-                        "type": "string"
-                      },
-                      "duracion": {
-                        "type": [
-                          "number",
-                          "string"
-                        ]
-                      },
-                      "director": {
-                        "type": "string"
-                      },
-                      "enCartelera": {
-                        "type": "boolean"
-                      },
-                      "proximamente": {
-                        "type": "boolean"
-                      },
-                      "poster_path": {
-                        "type": "string"
-                      },
-                      "calificacion": {
-                        "type": "string"
-                      },
-                      "sinopsis": {
-                        "type": "string"
-                      },
-                      "actors": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "nombre": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "nombre"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "nombre",
-                      "genero",
-                      "duracion",
-                      "director",
-                      "enCartelera",
-                      "proximamente",
-                      "poster_path",
-                      "calificacion",
-                      "sinopsis",
-                      "actors"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67ead6071c000e50611ae6ed",
-                      "nombre": "Conclave",
-                      "genero": "Drama",
-                      "duracion": 124,
-                      "director": "Edward Berger",
-                      "enCartelera": true,
-                      "proximamente": false,
-                      "poster_path": "poster-1743443463223-570551928.png",
-                      "calificacion": "+16",
-                      "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
-                      "actors": [
-                        {
-                          "id": "67ead5f71c000e50611ae6eb",
-                          "nombre": "Ralph Fiennes"
-                        },
-                        {
-                          "id": "67ead5fe1c000e50611ae6ec",
-                          "nombre": "Stanley Tucci"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          },
           "304": {}
         },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "tags": []
       },
       "post": {
         "summary": "/api/peliculas",
@@ -149,9 +38,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -168,9 +55,7 @@
             "required": true
           }
         ],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       },
       "put": {
@@ -226,9 +111,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -621,7 +504,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Conflicto con función siguiente que inicia a 22:00"
+                  "example": "Ya existe una función programada a esta hora en la sala seleccionada"
                 }
               }
             }
@@ -691,36 +574,8 @@
             "required": true
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Función, entradas y asientos relacionados eliminados"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Token inválido"
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/entradas": {
@@ -750,9 +605,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -825,9 +678,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -847,25 +698,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {},
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Token inválido"
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/usuarios/{id}": {
@@ -937,87 +771,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Login exitoso"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzc4NDk5LCJleHAiOjE3NDYzODIwOTl9.Y7-_qeKb4XX9q_TKy4F6LN6nclzsp0MXT2CTu36qn0A"
-                    },
-                    "user": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "67eacc0988ad0c52a7e3afcd"
-                        },
-                        "nombre": {
-                          "type": "string",
-                          "example": "hernan"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "asd2@test.com"
-                        },
-                        "tipo": {
-                          "type": "string",
-                          "example": "admin"
-                        },
-                        "entradas": {
-                          "type": "array",
-                          "items": {},
-                          "example": [
-                            null
-                          ]
-                        },
-                        "cupones": {
-                          "type": "array",
-                          "items": {},
-                          "example": [
-                            null
-                          ]
-                        },
-                        "favoritos": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ]
-                          },
-                          "example": [
-                            {
-                              "id": "67f5896785b98ff2964e2f85"
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/usuarios/register": {

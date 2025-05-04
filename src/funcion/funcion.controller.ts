@@ -73,6 +73,15 @@ async function add(req: Request, res: Response) {
       const finDia = new Date(nuevaFechaHora);
       finDia.setHours(23, 59, 59, 999);
 
+      const funcionExistente = await em.findOne(Funcion, {
+        sala,
+        fechaHora: nuevaFechaHora
+      });
+      
+      if (funcionExistente) {
+        throw new Error("Ya existe una función programada a esta hora en la sala seleccionada");
+      }
+
       const funcionAnterior = await em.findOne(
         Funcion,
         {

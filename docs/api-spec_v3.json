@@ -13,122 +13,6 @@
       "get": {
         "summary": "/api/peliculas",
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "found all peliculas"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          },
-                          "genero": {
-                            "type": "string"
-                          },
-                          "duracion": {
-                            "oneOf": [
-                              {
-                                "type": "number"
-                              },
-                              {
-                                "type": "string"
-                              }
-                            ]
-                          },
-                          "director": {
-                            "type": "string"
-                          },
-                          "enCartelera": {
-                            "type": "boolean"
-                          },
-                          "proximamente": {
-                            "type": "boolean"
-                          },
-                          "poster_path": {
-                            "type": "string"
-                          },
-                          "calificacion": {
-                            "type": "string"
-                          },
-                          "sinopsis": {
-                            "type": "string"
-                          },
-                          "actors": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "nombre": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "nombre"
-                              ]
-                            }
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "nombre",
-                          "genero",
-                          "duracion",
-                          "director",
-                          "enCartelera",
-                          "proximamente",
-                          "poster_path",
-                          "calificacion",
-                          "sinopsis",
-                          "actors"
-                        ]
-                      },
-                      "example": [
-                        {
-                          "id": "67ead6071c000e50611ae6ed",
-                          "nombre": "Conclave",
-                          "genero": "Drama",
-                          "duracion": 124,
-                          "director": "Edward Berger",
-                          "enCartelera": true,
-                          "proximamente": false,
-                          "poster_path": "poster-1743443463223-570551928.png",
-                          "calificacion": "+16",
-                          "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
-                          "actors": [
-                            {
-                              "id": "67ead5f71c000e50611ae6eb",
-                              "nombre": "Ralph Fiennes"
-                            },
-                            {
-                              "id": "67ead5fe1c000e50611ae6ec",
-                              "nombre": "Stanley Tucci"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
           "304": {
             "description": ""
           }
@@ -144,11 +28,7 @@
     "/api/peliculas/reportes/favoritos": {
       "get": {
         "summary": "/api/peliculas/reportes/favoritos",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -165,11 +45,7 @@
             }
           }
         ],
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "put": {
@@ -221,11 +97,7 @@
     "/api/actors": {
       "get": {
         "summary": "/api/actors",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -605,7 +477,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Conflicto con función siguiente que inicia a 22:00"
+                      "example": "Ya existe una función programada a esta hora en la sala seleccionada"
                     }
                   }
                 }
@@ -674,40 +546,7 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Función, entradas y asientos relacionados eliminados"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Token inválido"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -726,11 +565,7 @@
     "/api/entradas/reporteEntradasPorPelicula": {
       "get": {
         "summary": "/api/entradas/reporteEntradasPorPelicula",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -799,11 +634,7 @@
     "/api/usuarios": {
       "get": {
         "summary": "/api/usuarios",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -815,27 +646,7 @@
     "/api/usuarios/me": {
       "get": {
         "summary": "/api/usuarios/me",
-        "responses": {
-          "304": {
-            "description": ""
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Token inválido"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -904,87 +715,7 @@
     "/api/usuarios/login": {
       "post": {
         "summary": "/api/usuarios/login",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Login exitoso"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "token": {
-                          "type": "string",
-                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzc4NDk5LCJleHAiOjE3NDYzODIwOTl9.Y7-_qeKb4XX9q_TKy4F6LN6nclzsp0MXT2CTu36qn0A"
-                        },
-                        "user": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "example": "67eacc0988ad0c52a7e3afcd"
-                            },
-                            "nombre": {
-                              "type": "string",
-                              "example": "hernan"
-                            },
-                            "email": {
-                              "type": "string",
-                              "example": "asd2@test.com"
-                            },
-                            "tipo": {
-                              "type": "string",
-                              "example": "admin"
-                            },
-                            "entradas": {
-                              "type": "array",
-                              "items": {},
-                              "example": [
-                                null
-                              ]
-                            },
-                            "cupones": {
-                              "type": "array",
-                              "items": {},
-                              "example": [
-                                null
-                              ]
-                            },
-                            "favoritos": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "id"
-                                ]
-                              },
-                              "example": [
-                                {
-                                  "id": "67f5896785b98ff2964e2f85"
-                                }
-                              ]
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
