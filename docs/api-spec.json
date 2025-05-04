@@ -166,8 +166,90 @@
             "required": true
           }
         ],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "found pelicula"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "67f56a78dbaca5804ff3b4e5"
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "El Amateur: Operación Venganza"
+                    },
+                    "genero": {
+                      "type": "string",
+                      "example": "Acción"
+                    },
+                    "duracion": {
+                      "type": "number",
+                      "example": 123
+                    },
+                    "director": {
+                      "type": "string",
+                      "example": "James Hawes"
+                    },
+                    "enCartelera": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "proximamente": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "poster_path": {
+                      "type": "string",
+                      "example": "poster-1744136824141-849336333.jpeg"
+                    },
+                    "calificacion": {
+                      "type": "string",
+                      "example": "+13"
+                    },
+                    "sinopsis": {
+                      "type": "string",
+                      "example": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza."
+                    },
+                    "actors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "id": "67f56a53dbaca5804ff3b4e4",
+                          "nombre": "Rami Malek"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "put": {
         "summary": "/api/peliculas/{id}",
@@ -222,7 +304,9 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "304": {}
+        },
         "tags": []
       },
       "post": {
@@ -289,8 +373,49 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Found all salas"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "nombre"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67f8fee8fe3159465f3ad0af",
+                      "nombre": "Sala 1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "post": {
         "summary": "/api/salas",
@@ -298,8 +423,82 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Sala created"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6817df11da223a300932f30b"
+                    },
+                    "asientos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "fila": {
+                            "type": "string"
+                          },
+                          "numero": {
+                            "type": "number"
+                          },
+                          "sala": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "nombre": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "fila",
+                          "numero",
+                          "sala"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "6817df11da223a300932f30c",
+                          "fila": "A",
+                          "numero": 3,
+                          "sala": {
+                            "id": "6817df11da223a300932f30b",
+                            "nombre": "Sala 3"
+                          }
+                        }
+                      ]
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "Sala 3"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/salas/{id}": {
@@ -453,8 +652,132 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Found all funciones"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "fechaHora": {
+                        "type": "string"
+                      },
+                      "sala": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "pelicula": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "type": "number"
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "precio": {
+                        "type": "number"
+                      },
+                      "tipo": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "fechaHora",
+                      "sala",
+                      "pelicula",
+                      "precio",
+                      "tipo"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67f8ff14fe3159465f3ad171",
+                      "fechaHora": "2025-04-11T15:00:00.000Z",
+                      "sala": {
+                        "id": "67f8fee8fe3159465f3ad0af",
+                        "nombre": "Sala 1"
+                      },
+                      "pelicula": {
+                        "id": "67f56a78dbaca5804ff3b4e5",
+                        "nombre": "El Amateur: Operación Venganza",
+                        "genero": "Acción",
+                        "duracion": 123,
+                        "director": "James Hawes",
+                        "enCartelera": true,
+                        "proximamente": false,
+                        "poster_path": "poster-1744136824141-849336333.jpeg",
+                        "calificacion": "+13",
+                        "sinopsis": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza.",
+                        "actors": [
+                          "67f56a53dbaca5804ff3b4e4"
+                        ]
+                      },
+                      "precio": 600,
+                      "tipo": "SUBTITULADA"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "post": {
         "summary": "/api/funciones",
@@ -462,8 +785,40 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Función creada exitosamente"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Conflicto con función siguiente que inicia a 14:40"
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/funciones/{id}": {
@@ -479,8 +834,113 @@
             "required": true
           }
         ],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Found funcion"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6817a3f65d34783911ad129b"
+                    },
+                    "fechaHora": {
+                      "type": "string",
+                      "example": "2025-05-05T15:20:00.000Z"
+                    },
+                    "sala": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "67f8fef9fe3159465f3ad124"
+                        },
+                        "nombre": {
+                          "type": "string",
+                          "example": "Sala 2"
+                        }
+                      }
+                    },
+                    "pelicula": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "67f56a78dbaca5804ff3b4e5"
+                        },
+                        "nombre": {
+                          "type": "string",
+                          "example": "El Amateur: Operación Venganza"
+                        },
+                        "genero": {
+                          "type": "string",
+                          "example": "Acción"
+                        },
+                        "duracion": {
+                          "type": "number",
+                          "example": 123
+                        },
+                        "director": {
+                          "type": "string",
+                          "example": "James Hawes"
+                        },
+                        "enCartelera": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "proximamente": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "poster_path": {
+                          "type": "string",
+                          "example": "poster-1744136824141-849336333.jpeg"
+                        },
+                        "calificacion": {
+                          "type": "string",
+                          "example": "+13"
+                        },
+                        "sinopsis": {
+                          "type": "string",
+                          "example": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza."
+                        },
+                        "actors": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "67f56a53dbaca5804ff3b4e4"
+                          ]
+                        }
+                      }
+                    },
+                    "precio": {
+                      "type": "number",
+                      "example": 400
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "SUBTITULADA"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "put": {
         "summary": "/api/funciones/{id}",
@@ -1361,7 +1821,9 @@
             "required": true
           }
         ],
-        "responses": {},
+        "responses": {
+          "304": {}
+        },
         "tags": []
       }
     },
@@ -1432,8 +1894,74 @@
             "required": true
           }
         ],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "funcion": {
+                        "type": "string"
+                      },
+                      "asiento": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "fila": {
+                            "type": "string"
+                          },
+                          "numero": {
+                            "type": "number"
+                          },
+                          "sala": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "estado": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "funcion",
+                      "asiento",
+                      "estado"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "6817a3f65d34783911ad129c",
+                      "funcion": "6817a3f65d34783911ad129b",
+                      "asiento": {
+                        "id": "67f8fef9fe3159465f3ad127",
+                        "fila": "A",
+                        "numero": 5,
+                        "sala": "67f8fef9fe3159465f3ad124"
+                      },
+                      "estado": "disponible"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     }
   },
