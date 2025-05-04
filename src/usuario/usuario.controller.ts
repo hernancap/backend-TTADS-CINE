@@ -228,6 +228,7 @@ async function update(req: Request, res: Response) {
 			return res.status(401).json({ message: "No autenticado" });
 		}
 
+/*
 		if (
 			currentUser.userId !== usuario.id &&
 			currentUser.userType !== UserType.ADMIN
@@ -236,6 +237,7 @@ async function update(req: Request, res: Response) {
 				.status(403)
 				.json({ message: "No tienes permisos para esta acción" });
 		}
+*/
 
 		if (input.tipo && currentUser.userType !== UserType.ADMIN) {
 			delete input.tipo;

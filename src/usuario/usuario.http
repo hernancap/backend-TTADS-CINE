@@ -1,10 +1,10 @@
 ### Variables Globales Usuarios
 @baseUrlUsuarios = http://localhost:3000/api/usuarios
-@usuarioId = 65f0123456789abcdef12345
+@usuarioId = 67eacc0988ad0c52a7e3afcd
 
 ### Obtener todos los usuarios
 GET {{baseUrlUsuarios}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2M2NmM2ZDk1ZGNmODRmZDFhNzI0NjEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQyODU0NjUyLCJleHAiOjE3NDI4NTgyNTJ9.uLEbANT5zOrD4L_caCf5JUVdgSgxbYZ9eWAcrhe863w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzk3Mzc3LCJleHAiOjE3NDY0MDA5Nzd9.HCAm0fU9oikPuX2G4IBG4URsXgffVKbwzKhXpM2XHSE
 
 ### Obtener me
 GET {{baseUrlUsuarios}}/me
@@ -36,6 +36,7 @@ Content-Type: application/json
 
 ### Actualizar usuario parcial (PATCH)
 PATCH {{baseUrlUsuarios}}/{{usuarioId}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzk3NTA0LCJleHAiOjE3NDY0MDExMDR9.lv25f3qWNeUFVyk3x-fS2uT4KRaFx1AiMfxzMJxmPz4
 Content-Type: application/json
 
 {

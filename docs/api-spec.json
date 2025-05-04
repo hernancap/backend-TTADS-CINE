@@ -17,120 +17,9 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "found all peliculas"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "nombre": {
-                        "type": "string"
-                      },
-                      "genero": {
-                        "type": "string"
-                      },
-                      "duracion": {
-                        "type": [
-                          "number",
-                          "string"
-                        ]
-                      },
-                      "director": {
-                        "type": "string"
-                      },
-                      "enCartelera": {
-                        "type": "boolean"
-                      },
-                      "proximamente": {
-                        "type": "boolean"
-                      },
-                      "poster_path": {
-                        "type": "string"
-                      },
-                      "calificacion": {
-                        "type": "string"
-                      },
-                      "sinopsis": {
-                        "type": "string"
-                      },
-                      "actors": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "nombre": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "nombre"
-                          ]
-                        }
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "nombre",
-                      "genero",
-                      "duracion",
-                      "director",
-                      "enCartelera",
-                      "proximamente",
-                      "poster_path",
-                      "calificacion",
-                      "sinopsis",
-                      "actors"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67ead6071c000e50611ae6ed",
-                      "nombre": "Conclave",
-                      "genero": "Drama",
-                      "duracion": 124,
-                      "director": "Edward Berger",
-                      "enCartelera": true,
-                      "proximamente": false,
-                      "poster_path": "poster-1743443463223-570551928.png",
-                      "calificacion": "+16",
-                      "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
-                      "actors": [
-                        {
-                          "id": "67ead5f71c000e50611ae6eb",
-                          "nombre": "Ralph Fiennes"
-                        },
-                        {
-                          "id": "67ead5fe1c000e50611ae6ec",
-                          "nombre": "Stanley Tucci"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          },
           "304": {}
         },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "tags": []
       },
       "post": {
         "summary": "/api/peliculas",
@@ -149,8 +38,54 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Películas favoritas por usuarios"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      },
+                      "cantidadFavoritos": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "nombre",
+                      "cantidadFavoritos"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67f5896785b98ff2964e2f85",
+                      "nombre": "El Contador 2 ",
+                      "cantidadFavoritos": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/peliculas/{id}": {
@@ -181,35 +116,35 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "example": "67f56a78dbaca5804ff3b4e5"
+                      "example": "67f594f285b98ff2964e2f91"
                     },
                     "nombre": {
                       "type": "string",
-                      "example": "El Amateur: Operación Venganza"
+                      "example": "Encerrado"
                     },
                     "genero": {
                       "type": "string",
-                      "example": "Acción"
+                      "example": "Suspenso"
                     },
                     "duracion": {
-                      "type": "number",
-                      "example": 123
+                      "type": "string",
+                      "example": "95"
                     },
                     "director": {
                       "type": "string",
-                      "example": "James Hawes"
+                      "example": "David Yarovesky"
                     },
                     "enCartelera": {
                       "type": "boolean",
-                      "example": true
+                      "example": false
                     },
                     "proximamente": {
                       "type": "boolean",
-                      "example": false
+                      "example": true
                     },
                     "poster_path": {
                       "type": "string",
-                      "example": "poster-1744136824141-849336333.jpeg"
+                      "example": "poster-1744147698765-970347976.jpg"
                     },
                     "calificacion": {
                       "type": "string",
@@ -217,7 +152,7 @@
                     },
                     "sinopsis": {
                       "type": "string",
-                      "example": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza."
+                      "example": "Del productor Sam Raimi, este thriller de terror sigue a un ladrón (Bill Skarsgård) que irrumpe en el auto equivocado y se convierte en presa de su vengativo dueño (Anthony Hopkins). Eddie enfrenta un juego mortal de supervivencia, donde escapar es una ilusión y la justicia pisa el acelerador."
                     },
                     "actors": {
                       "type": "array",
@@ -230,12 +165,16 @@
                           "nombre": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "id",
+                          "nombre"
+                        ]
                       },
                       "example": [
                         {
-                          "id": "67f56a53dbaca5804ff3b4e4",
-                          "nombre": "Rami Malek"
+                          "id": "67f594a385b98ff2964e2f8f",
+                          "nombre": "Bill Skarsgård"
                         }
                       ]
                     }
@@ -304,9 +243,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -373,49 +310,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found all salas"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "nombre": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "nombre"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67f8fee8fe3159465f3ad0af",
-                      "nombre": "Sala 1"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/salas",
@@ -423,82 +319,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Sala created"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6817df11da223a300932f30b"
-                    },
-                    "asientos": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "fila": {
-                            "type": "string"
-                          },
-                          "numero": {
-                            "type": "number"
-                          },
-                          "sala": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "nombre": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "fila",
-                          "numero",
-                          "sala"
-                        ]
-                      },
-                      "example": [
-                        {
-                          "id": "6817df11da223a300932f30c",
-                          "fila": "A",
-                          "numero": 3,
-                          "sala": {
-                            "id": "6817df11da223a300932f30b",
-                            "nombre": "Sala 3"
-                          }
-                        }
-                      ]
-                    },
-                    "nombre": {
-                      "type": "string",
-                      "example": "Sala 3"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/salas/{id}": {
@@ -653,131 +475,9 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found all funciones"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "fechaHora": {
-                        "type": "string"
-                      },
-                      "sala": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "pelicula": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          },
-                          "genero": {
-                            "type": "string"
-                          },
-                          "duracion": {
-                            "type": "number"
-                          },
-                          "director": {
-                            "type": "string"
-                          },
-                          "enCartelera": {
-                            "type": "boolean"
-                          },
-                          "proximamente": {
-                            "type": "boolean"
-                          },
-                          "poster_path": {
-                            "type": "string"
-                          },
-                          "calificacion": {
-                            "type": "string"
-                          },
-                          "sinopsis": {
-                            "type": "string"
-                          },
-                          "actors": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "precio": {
-                        "type": "number"
-                      },
-                      "tipo": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "fechaHora",
-                      "sala",
-                      "pelicula",
-                      "precio",
-                      "tipo"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67f8ff14fe3159465f3ad171",
-                      "fechaHora": "2025-04-11T15:00:00.000Z",
-                      "sala": {
-                        "id": "67f8fee8fe3159465f3ad0af",
-                        "nombre": "Sala 1"
-                      },
-                      "pelicula": {
-                        "id": "67f56a78dbaca5804ff3b4e5",
-                        "nombre": "El Amateur: Operación Venganza",
-                        "genero": "Acción",
-                        "duracion": 123,
-                        "director": "James Hawes",
-                        "enCartelera": true,
-                        "proximamente": false,
-                        "poster_path": "poster-1744136824141-849336333.jpeg",
-                        "calificacion": "+13",
-                        "sinopsis": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza.",
-                        "actors": [
-                          "67f56a53dbaca5804ff3b4e4"
-                        ]
-                      },
-                      "precio": 600,
-                      "tipo": "SUBTITULADA"
-                    }
-                  ]
-                }
-              }
-            }
-          },
           "304": {}
         },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "tags": []
       },
       "post": {
         "summary": "/api/funciones",
@@ -785,40 +485,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Función creada exitosamente"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Conflicto con función siguiente que inicia a 14:40"
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/funciones/{id}": {
@@ -834,113 +502,8 @@
             "required": true
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found funcion"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6817a3f65d34783911ad129b"
-                    },
-                    "fechaHora": {
-                      "type": "string",
-                      "example": "2025-05-05T15:20:00.000Z"
-                    },
-                    "sala": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "67f8fef9fe3159465f3ad124"
-                        },
-                        "nombre": {
-                          "type": "string",
-                          "example": "Sala 2"
-                        }
-                      }
-                    },
-                    "pelicula": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "67f56a78dbaca5804ff3b4e5"
-                        },
-                        "nombre": {
-                          "type": "string",
-                          "example": "El Amateur: Operación Venganza"
-                        },
-                        "genero": {
-                          "type": "string",
-                          "example": "Acción"
-                        },
-                        "duracion": {
-                          "type": "number",
-                          "example": 123
-                        },
-                        "director": {
-                          "type": "string",
-                          "example": "James Hawes"
-                        },
-                        "enCartelera": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "proximamente": {
-                          "type": "boolean",
-                          "example": false
-                        },
-                        "poster_path": {
-                          "type": "string",
-                          "example": "poster-1744136824141-849336333.jpeg"
-                        },
-                        "calificacion": {
-                          "type": "string",
-                          "example": "+13"
-                        },
-                        "sinopsis": {
-                          "type": "string",
-                          "example": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza."
-                        },
-                        "actors": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          },
-                          "example": [
-                            "67f56a53dbaca5804ff3b4e4"
-                          ]
-                        }
-                      }
-                    },
-                    "precio": {
-                      "type": "number",
-                      "example": 400
-                    },
-                    "tipo": {
-                      "type": "string",
-                      "example": "SUBTITULADA"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "put": {
         "summary": "/api/funciones/{id}",
@@ -1015,7 +578,9 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "304": {}
+        },
         "tags": []
       }
     },
@@ -1088,236 +653,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Todos los usuarios"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "nombre": {
-                        "type": "string"
-                      },
-                      "email": {
-                        "type": "string"
-                      },
-                      "password": {
-                        "type": "string"
-                      },
-                      "tipo": {
-                        "type": "string"
-                      },
-                      "entradas": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "precio": {
-                              "type": "number"
-                            },
-                            "fechaCompra": {
-                              "type": "string"
-                            },
-                            "usuario": {
-                              "type": "string"
-                            },
-                            "funcion": {
-                              "type": "string"
-                            },
-                            "asientoFuncion": {
-                              "type": "string"
-                            },
-                            "usada": {
-                              "type": "boolean"
-                            },
-                            "pago_id": {
-                              "type": "number"
-                            },
-                            "pago_fecha": {
-                              "type": "string"
-                            },
-                            "pago_metodo": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "precio",
-                            "fechaCompra",
-                            "usuario",
-                            "funcion",
-                            "asientoFuncion",
-                            "usada",
-                            "pago_id",
-                            "pago_fecha",
-                            "pago_metodo"
-                          ]
-                        }
-                      },
-                      "favoritos": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "nombre",
-                      "email",
-                      "password",
-                      "tipo",
-                      "entradas",
-                      "favoritos"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67eacc0988ad0c52a7e3afcd",
-                      "nombre": "hernan",
-                      "email": "asd2@test.com",
-                      "password": "$2b$10$wirqEgC/of9wEnQxOqq9XenPzoBakuYAX4tD8iKTwNuc5lArWI/ly",
-                      "tipo": "admin",
-                      "entradas": [
-                        {
-                          "id": "67f903edb5308ed5168fcbec",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T11:58:37.662Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad25b",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad297",
-                          "usada": false,
-                          "pago_id": 1322968512,
-                          "pago_fecha": "2025-04-11T11:58:36.101Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f90494b5308ed5168fccd8",
-                          "precio": 540,
-                          "fechaCompra": "2025-04-11T12:01:24.543Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f90430b5308ed5168fcc63",
-                          "asientoFuncion": "67f90430b5308ed5168fcc7d",
-                          "usada": false,
-                          "pago_id": 1322968534,
-                          "pago_fecha": "2025-04-11T12:01:23.037Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906a6b5308ed5168fccd9",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:14.377Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad25b",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad298",
-                          "usada": false,
-                          "pago_id": 1322969984,
-                          "pago_fecha": "2025-04-11T12:10:12.847Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906a6b5308ed5168fccda",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:14.690Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad25b",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad2a5",
-                          "usada": false,
-                          "pago_id": 1322969984,
-                          "pago_fecha": "2025-04-11T12:10:12.847Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906d0b5308ed5168fccdb",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:56.718Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad2d0",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad30c",
-                          "usada": false,
-                          "pago_id": 1334677993,
-                          "pago_fecha": "2025-04-11T12:10:55.159Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906d1b5308ed5168fccdc",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:57.020Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad2d0",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad319",
-                          "usada": false,
-                          "pago_id": 1334677993,
-                          "pago_fecha": "2025-04-11T12:10:55.159Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906d1b5308ed5168fccde",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:57.364Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad2d0",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad326",
-                          "usada": false,
-                          "pago_id": 1334677993,
-                          "pago_fecha": "2025-04-11T12:10:55.159Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "67f906d1b5308ed5168fccdf",
-                          "precio": 600,
-                          "fechaCompra": "2025-04-11T12:10:57.666Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "67f8ff15fe3159465f3ad2d0",
-                          "asientoFuncion": "67f8ff15fe3159465f3ad327",
-                          "usada": false,
-                          "pago_id": 1334677993,
-                          "pago_fecha": "2025-04-11T12:10:55.159Z",
-                          "pago_metodo": "debvisa"
-                        },
-                        {
-                          "id": "6813d380f77ee0bbf7fe4cb5",
-                          "precio": 200,
-                          "fechaCompra": "2025-05-01T20:03:12.863Z",
-                          "usuario": "67eacc0988ad0c52a7e3afcd",
-                          "funcion": "6813b4c4344900ef116b6083",
-                          "asientoFuncion": "6813b4c4344900ef116b60ac",
-                          "usada": false,
-                          "pago_id": 1335547303,
-                          "pago_fecha": "2025-05-01T20:03:11.815Z",
-                          "pago_metodo": "debvisa"
-                        }
-                      ],
-                      "favoritos": [
-                        "67f5896785b98ff2964e2f85",
-                        "67f594f285b98ff2964e2f91"
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/usuarios",
@@ -1325,70 +662,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuario creado"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6817daa2da223a300932f309"
-                    },
-                    "entradas": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "cupones": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "favoritos": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "nombre": {
-                      "type": "string",
-                      "example": "Hernán"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "admin@admin.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "******"
-                    },
-                    "tipo": {
-                      "type": "string",
-                      "example": "comun"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/usuarios/me": {
@@ -1398,67 +673,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuario autenticado"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "nombre": {
-                      "type": "string",
-                      "example": "Juan"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "juan@mail.com"
-                    },
-                    "tipo": {
-                      "type": "string",
-                      "example": "comun"
-                    },
-                    "cupones": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "favoritos": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "id": {
-                      "type": "string",
-                      "example": "6817daceda223a300932f30a"
-                    },
-                    "entradas": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     },
     "/api/usuarios/{id}": {
@@ -1474,64 +690,8 @@
             "required": true
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Usuario encontrado"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6817daa2da223a300932f309"
-                    },
-                    "nombre": {
-                      "type": "string",
-                      "example": "Hernán"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "admin@admin.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "******"
-                    },
-                    "tipo": {
-                      "type": "string",
-                      "example": "comun"
-                    },
-                    "entradas": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    },
-                    "favoritos": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "put": {
         "summary": "/api/usuarios/{id}",
@@ -1560,19 +720,19 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "example": "6817daa2da223a300932f309"
+                      "example": "6817daceda223a300932f30a"
                     },
                     "nombre": {
                       "type": "string",
-                      "example": "Hernán"
+                      "example": "Juan"
                     },
                     "email": {
                       "type": "string",
-                      "example": "admin@admin.com"
+                      "example": "juan@mail.com"
                     },
                     "tipo": {
                       "type": "string",
-                      "example": "admin"
+                      "example": "comun"
                     },
                     "entradas": {
                       "type": "array",
@@ -1590,9 +750,67 @@
                     },
                     "favoritos": {
                       "type": "array",
-                      "items": {},
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "type": "string"
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
                       "example": [
-                        null
+                        {
+                          "id": "67f5943485b98ff2964e2f8e",
+                          "nombre": "Thunderbolts",
+                          "genero": "Acción",
+                          "duracion": "120",
+                          "director": "Jake Schreier",
+                          "enCartelera": false,
+                          "proximamente": true,
+                          "poster_path": "poster-1744147508374-563301491.jpg",
+                          "calificacion": "ATP",
+                          "sinopsis": "Un grupo de supervillanos es reclutado para hacer misiones para el gobierno.",
+                          "actors": [
+                            "67f593b785b98ff2964e2f89",
+                            "67f593cc85b98ff2964e2f8a",
+                            "67f593d485b98ff2964e2f8b",
+                            "67f593e685b98ff2964e2f8c",
+                            "67f593f485b98ff2964e2f8d"
+                          ]
+                        }
                       ]
                     }
                   }
@@ -1659,7 +877,7 @@
                   "properties": {
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE3ZGFjZWRhMjIzYTMwMDkzMmYzMGEiLCJ1c2VyVHlwZSI6ImNvbXVuIiwiaWF0IjoxNzQ2MzkzODA5LCJleHAiOjE3NDYzOTc0MDl9.8BzPo8l04v9e4QdJnuZOXASlgK7_s3O-irTUuOy8ToA"
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE3ZGFjZWRhMjIzYTMwMDkzMmYzMGEiLCJ1c2VyVHlwZSI6ImNvbXVuIiwiaWF0IjoxNzQ2Mzk5MDI1LCJleHAiOjE3NDY0MDI2MjV9.-ef3mdmbv-iYKFBsyWJXgDynOPLv6RO_8zvBvOCO7lI"
                     },
                     "user": {
                       "type": "object",
@@ -1821,9 +1039,7 @@
             "required": true
           }
         ],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -1894,74 +1110,8 @@
             "required": true
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "funcion": {
-                        "type": "string"
-                      },
-                      "asiento": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "fila": {
-                            "type": "string"
-                          },
-                          "numero": {
-                            "type": "number"
-                          },
-                          "sala": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "estado": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "funcion",
-                      "asiento",
-                      "estado"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "6817a3f65d34783911ad129c",
-                      "funcion": "6817a3f65d34783911ad129b",
-                      "asiento": {
-                        "id": "67f8fef9fe3159465f3ad127",
-                        "fila": "A",
-                        "numero": 5,
-                        "sala": "67f8fef9fe3159465f3ad124"
-                      },
-                      "estado": "disponible"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "304": {}
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       }
     }
   },
