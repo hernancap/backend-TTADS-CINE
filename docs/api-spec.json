@@ -1,0 +1,1207 @@
+{
+  "definitions": {},
+  "info": {
+    "title": "backend",
+    "version": "1.0.0",
+    "license": {
+      "name": "ISC"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3)."
+  },
+  "paths": {
+    "/api/peliculas": {
+      "get": {
+        "summary": "/api/peliculas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "found all peliculas"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      },
+                      "genero": {
+                        "type": "string"
+                      },
+                      "duracion": {
+                        "type": [
+                          "number",
+                          "string"
+                        ]
+                      },
+                      "director": {
+                        "type": "string"
+                      },
+                      "enCartelera": {
+                        "type": "boolean"
+                      },
+                      "proximamente": {
+                        "type": "boolean"
+                      },
+                      "poster_path": {
+                        "type": "string"
+                      },
+                      "calificacion": {
+                        "type": "string"
+                      },
+                      "sinopsis": {
+                        "type": "string"
+                      },
+                      "actors": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "nombre": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "nombre"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "nombre",
+                      "genero",
+                      "duracion",
+                      "director",
+                      "enCartelera",
+                      "proximamente",
+                      "poster_path",
+                      "calificacion",
+                      "sinopsis",
+                      "actors"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67ead6071c000e50611ae6ed",
+                      "nombre": "Conclave",
+                      "genero": "Drama",
+                      "duracion": 124,
+                      "director": "Edward Berger",
+                      "enCartelera": true,
+                      "proximamente": false,
+                      "poster_path": "poster-1743443463223-570551928.png",
+                      "calificacion": "+16",
+                      "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
+                      "actors": [
+                        {
+                          "id": "67ead5f71c000e50611ae6eb",
+                          "nombre": "Ralph Fiennes"
+                        },
+                        {
+                          "id": "67ead5fe1c000e50611ae6ec",
+                          "nombre": "Stanley Tucci"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "summary": "/api/peliculas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/peliculas/reportes/favoritos": {
+      "get": {
+        "summary": "/api/peliculas/reportes/favoritos",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      }
+    },
+    "/api/peliculas/{id}": {
+      "get": {
+        "summary": "/api/peliculas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/peliculas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/peliculas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/peliculas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/actors": {
+      "get": {
+        "summary": "/api/actors",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/actors",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/actors/{id}": {
+      "get": {
+        "summary": "/api/actors/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/actors/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/actors/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/salas": {
+      "get": {
+        "summary": "/api/salas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/salas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/salas/{id}": {
+      "get": {
+        "summary": "/api/salas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/salas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/salas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/salas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/asientos": {
+      "get": {
+        "summary": "/api/asientos",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/asientos",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/asientos/{id}": {
+      "get": {
+        "summary": "/api/asientos/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/asientos/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/asientos/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/asientos/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/funciones": {
+      "get": {
+        "summary": "/api/funciones",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Found all funciones"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "fechaHora": {
+                        "type": "string"
+                      },
+                      "sala": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "pelicula": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "type": [
+                              "number",
+                              "string"
+                            ]
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "precio": {
+                        "type": "number"
+                      },
+                      "tipo": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "fechaHora",
+                      "sala",
+                      "pelicula",
+                      "precio",
+                      "tipo"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67f8ff14fe3159465f3ad171",
+                      "fechaHora": "2025-04-11T15:00:00.000Z",
+                      "sala": {
+                        "id": "67f8fee8fe3159465f3ad0af",
+                        "nombre": "Sala 1"
+                      },
+                      "pelicula": {
+                        "id": "67f56a78dbaca5804ff3b4e5",
+                        "nombre": "El Amateur: Operación Venganza",
+                        "genero": "Acción",
+                        "duracion": 123,
+                        "director": "James Hawes",
+                        "enCartelera": true,
+                        "proximamente": false,
+                        "poster_path": "poster-1744136824141-849336333.jpeg",
+                        "calificacion": "+13",
+                        "sinopsis": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza.",
+                        "actors": [
+                          "67f56a53dbaca5804ff3b4e4"
+                        ]
+                      },
+                      "precio": 600,
+                      "tipo": "SUBTITULADA"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "summary": "/api/funciones",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Función creada exitosamente"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Conflicto con función siguiente que inicia a 22:00"
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/funciones/{id}": {
+      "get": {
+        "summary": "/api/funciones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/funciones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/funciones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/funciones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Función, entradas y asientos relacionados eliminados"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Token inválido"
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/entradas": {
+      "get": {
+        "summary": "/api/entradas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/entradas",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/entradas/reporteEntradasPorPelicula": {
+      "get": {
+        "summary": "/api/entradas/reporteEntradasPorPelicula",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      }
+    },
+    "/api/entradas/{id}": {
+      "get": {
+        "summary": "/api/entradas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/entradas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/entradas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/entradas/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/usuarios": {
+      "get": {
+        "summary": "/api/usuarios",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/usuarios",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/usuarios/me": {
+      "get": {
+        "summary": "/api/usuarios/me",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "304": {},
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Token inválido"
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/usuarios/{id}": {
+      "get": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/usuarios/login": {
+      "post": {
+        "summary": "/api/usuarios/login",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Login exitoso"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzc4NDk5LCJleHAiOjE3NDYzODIwOTl9.Y7-_qeKb4XX9q_TKy4F6LN6nclzsp0MXT2CTu36qn0A"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "67eacc0988ad0c52a7e3afcd"
+                        },
+                        "nombre": {
+                          "type": "string",
+                          "example": "hernan"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "asd2@test.com"
+                        },
+                        "tipo": {
+                          "type": "string",
+                          "example": "admin"
+                        },
+                        "entradas": {
+                          "type": "array",
+                          "items": {},
+                          "example": [
+                            null
+                          ]
+                        },
+                        "cupones": {
+                          "type": "array",
+                          "items": {},
+                          "example": [
+                            null
+                          ]
+                        },
+                        "favoritos": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ]
+                          },
+                          "example": [
+                            {
+                              "id": "67f5896785b98ff2964e2f85"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/usuarios/register": {
+      "post": {
+        "summary": "/api/usuarios/register",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/cupones": {
+      "get": {
+        "summary": "/api/cupones",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "post": {
+        "summary": "/api/cupones",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/cupones/{id}": {
+      "get": {
+        "summary": "/api/cupones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/cupones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/cupones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "delete": {
+        "summary": "/api/cupones/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/cupones/usuario/{userId}": {
+      "get": {
+        "summary": "/api/cupones/usuario/{userId}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/mercadopago/create-preference": {
+      "post": {
+        "summary": "/api/mercadopago/create-preference",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/mercadopago/webhook": {
+      "post": {
+        "summary": "/api/mercadopago/webhook",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/asientofuncion/{id}": {
+      "put": {
+        "summary": "/api/asientofuncion/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "patch": {
+        "summary": "/api/asientofuncion/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/api/asientofuncion/disponibilidad/{funcionId}": {
+      "get": {
+        "summary": "/api/asientofuncion/disponibilidad/{funcionId}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "funcionId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}

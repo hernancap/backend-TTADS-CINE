@@ -14,8 +14,24 @@ import { cuponRouter } from './cupon/cupon.routes.js'
 import { asientoFuncionRouter } from './asientoFuncion/asientoFuncion.routes.js'
 import { mercadoPagorouter } from './mercadoPagoTest/mercadopago.routes.js'
 import { env } from './config/env.js';
+import expressOasGenerator from 'express-oas-generator';
+import swaggerUi from 'swagger-ui-express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const app = express()
+const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+if (process.env.NODE_ENV !== 'production') {
+    expressOasGenerator.init(
+      app,
+      {},
+      path.join(__dirname, '../docs/api-spec.json'),
+      60 * 1000
+    );
+}
 
 app.use(cors({
     origin: env.frontend.url, 
@@ -43,11 +59,25 @@ app.use('/api/cupones', cuponRouter)
 app.use('/api/mercadopago', mercadoPagorouter);
 app.use('/api/asientofuncion', asientoFuncionRouter)
 
+app.use(
+    '/', 
+    express.static(path.join(__dirname, '../docs'))
+  );
+
+app.use(
+    '/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(
+      undefined,
+      { swaggerUrl: '/api-spec.json' }
+    )
+  );
+
 app.use((_, res)=>{
     res.status(404).send({message: 'Resource not found'})
 })
 
-app.listen(3000, ()=>{
+app.listen(env.port, ()=>{
     const serverAddress = process.env.RENDER_EXTERNAL_URL || `http://localhost:${env.port}/`;
     console.log(`Server running on ${serverAddress}`);
 })
