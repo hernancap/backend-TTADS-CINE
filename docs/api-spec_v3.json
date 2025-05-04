@@ -28,11 +28,7 @@
     "/api/peliculas/reportes/favoritos": {
       "get": {
         "summary": "/api/peliculas/reportes/favoritos",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -49,11 +45,7 @@
             }
           }
         ],
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "put": {
@@ -105,7 +97,11 @@
     "/api/actors": {
       "get": {
         "summary": "/api/actors",
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       },
       "post": {
@@ -164,11 +160,7 @@
     "/api/salas": {
       "get": {
         "summary": "/api/salas",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -242,7 +234,69 @@
     "/api/asientos": {
       "get": {
         "summary": "/api/asientos",
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Found all asientos"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "fila": {
+                            "type": "string"
+                          },
+                          "numero": {
+                            "type": "number"
+                          },
+                          "sala": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "nombre": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "fila",
+                          "numero",
+                          "sala"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "67f8fee8fe3159465f3ad0b4",
+                          "fila": "A",
+                          "numero": 7,
+                          "sala": {
+                            "id": "67f8fee8fe3159465f3ad0af",
+                            "nombre": "Sala 1"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       },
       "post": {
@@ -446,53 +500,13 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": ""
           }
         },
         "tags": []
       },
       "post": {
         "summary": "/api/funciones",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Función creada exitosamente"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Ya existe una función programada a esta hora en la sala seleccionada"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -509,115 +523,7 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Found funcion"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "6817a6f8161d7f2785ddd02d"
-                        },
-                        "fechaHora": {
-                          "type": "string",
-                          "example": "2025-05-05T23:20:00.000Z"
-                        },
-                        "sala": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "example": "67f8fef9fe3159465f3ad124"
-                            },
-                            "nombre": {
-                              "type": "string",
-                              "example": "Sala 2"
-                            }
-                          }
-                        },
-                        "pelicula": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "example": "67ead6071c000e50611ae6ed"
-                            },
-                            "nombre": {
-                              "type": "string",
-                              "example": "Conclave"
-                            },
-                            "genero": {
-                              "type": "string",
-                              "example": "Drama"
-                            },
-                            "duracion": {
-                              "type": "number",
-                              "example": 124
-                            },
-                            "director": {
-                              "type": "string",
-                              "example": "Edward Berger"
-                            },
-                            "enCartelera": {
-                              "type": "boolean",
-                              "example": true
-                            },
-                            "proximamente": {
-                              "type": "boolean",
-                              "example": false
-                            },
-                            "poster_path": {
-                              "type": "string",
-                              "example": "poster-1743443463223-570551928.png"
-                            },
-                            "calificacion": {
-                              "type": "string",
-                              "example": "+16"
-                            },
-                            "sinopsis": {
-                              "type": "string",
-                              "example": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia."
-                            },
-                            "actors": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              },
-                              "example": [
-                                "67ead5f71c000e50611ae6eb"
-                              ]
-                            }
-                          }
-                        },
-                        "precio": {
-                          "type": "number",
-                          "example": 300
-                        },
-                        "tipo": {
-                          "type": "string",
-                          "example": "SUBTITULADA"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       },
       "put": {
@@ -669,7 +575,167 @@
     "/api/entradas": {
       "get": {
         "summary": "/api/entradas",
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Found all entradas"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "precio": {
+                            "type": "number"
+                          },
+                          "fechaCompra": {
+                            "type": "string"
+                          },
+                          "usuario": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "nombre": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "password": {
+                                "type": "string"
+                              },
+                              "tipo": {
+                                "type": "string"
+                              },
+                              "favoritos": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "funcion": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "fechaHora": {
+                                "type": "string"
+                              },
+                              "sala": {
+                                "type": "string"
+                              },
+                              "pelicula": {
+                                "type": "string"
+                              },
+                              "precio": {
+                                "type": "number"
+                              },
+                              "tipo": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "asientoFuncion": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "funcion": {
+                                "type": "string"
+                              },
+                              "asiento": {
+                                "type": "string"
+                              },
+                              "estado": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "usada": {
+                            "type": "boolean"
+                          },
+                          "pago_id": {
+                            "type": "number"
+                          },
+                          "pago_fecha": {
+                            "type": "string"
+                          },
+                          "pago_metodo": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "precio",
+                          "fechaCompra",
+                          "usuario",
+                          "funcion",
+                          "asientoFuncion",
+                          "usada",
+                          "pago_id",
+                          "pago_fecha",
+                          "pago_metodo"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "67f903edb5308ed5168fcbec",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T11:58:37.662Z",
+                          "usuario": {
+                            "id": "67eacc0988ad0c52a7e3afcd",
+                            "nombre": "hernan",
+                            "email": "asd2@test.com",
+                            "password": "$2b$10$wirqEgC/of9wEnQxOqq9XenPzoBakuYAX4tD8iKTwNuc5lArWI/ly",
+                            "tipo": "admin",
+                            "favoritos": [
+                              "67f5896785b98ff2964e2f85",
+                              "67f594f285b98ff2964e2f91"
+                            ]
+                          },
+                          "funcion": {
+                            "id": "67f8ff15fe3159465f3ad25b",
+                            "fechaHora": "2025-04-11T19:40:00.000Z",
+                            "sala": "67f8fee8fe3159465f3ad0af",
+                            "pelicula": "67f56a78dbaca5804ff3b4e5",
+                            "precio": 600,
+                            "tipo": "SUBTITULADA"
+                          },
+                          "asientoFuncion": {
+                            "id": "67f8ff15fe3159465f3ad297",
+                            "funcion": "67f8ff15fe3159465f3ad25b",
+                            "asiento": "67f8fee8fe3159465f3ad0eb",
+                            "estado": "vendido"
+                          },
+                          "usada": false,
+                          "pago_id": 1322968512,
+                          "pago_fecha": "2025-04-11T11:58:36.101Z",
+                          "pago_metodo": "debvisa"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       },
       "post": {
@@ -681,11 +747,7 @@
     "/api/entradas/reporteEntradasPorPelicula": {
       "get": {
         "summary": "/api/entradas/reporteEntradasPorPelicula",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -766,7 +828,11 @@
     "/api/usuarios/me": {
       "get": {
         "summary": "/api/usuarios/me",
-        "responses": {},
+        "responses": {
+          "304": {
+            "description": ""
+          }
+        },
         "tags": []
       }
     },
@@ -852,7 +918,7 @@
                       "properties": {
                         "token": {
                           "type": "string",
-                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2MzgwOTE1LCJleHAiOjE3NDYzODQ1MTV9.YADRAA5tUmH0CX6_oShKP_yYBeUzX5MEDjhpINRDEqc"
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzg1NTA2LCJleHAiOjE3NDYzODkxMDZ9.RLmPZyIzGJD__4LRA-FS59QGyFUbo0BrW8g3f6of6Gs"
                         },
                         "user": {
                           "type": "object",
@@ -929,7 +995,24 @@
     "/api/cupones": {
       "get": {
         "summary": "/api/cupones",
-        "responses": {},
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Acceso no autorizado"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       },
       "post": {
@@ -1013,11 +1096,7 @@
             }
           }
         ],
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -1080,76 +1159,7 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "funcion": {
-                            "type": "string"
-                          },
-                          "asiento": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "fila": {
-                                "type": "string"
-                              },
-                              "numero": {
-                                "type": "number"
-                              },
-                              "sala": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "estado": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "funcion",
-                          "asiento",
-                          "estado"
-                        ]
-                      },
-                      "example": [
-                        {
-                          "id": "6817a6f8161d7f2785ddd02e",
-                          "funcion": "6817a6f8161d7f2785ddd02d",
-                          "asiento": {
-                            "id": "67f8fef9fe3159465f3ad127",
-                            "fila": "A",
-                            "numero": 5,
-                            "sala": "67f8fef9fe3159465f3ad124"
-                          },
-                          "estado": "disponible"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     }

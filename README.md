@@ -11,7 +11,7 @@ Por otro lado, los usuarios de tipo administrador, además de tener control tota
 La aplicación está desarrollada en **TypeScript**. Utiliza **Node.js** como entorno de ejecución y **Express** como framework web para construir APIs y manejar rutas. La seguridad se implementa mediante **JWT (JSON Web Tokens)**. Para interactuar con la base de datos de **MongoDB**, se usa **MikroORM** como ORM.
 
 ## Proposal
-[Accede aquí a la Proposal del TP]
+[Accede aquí a la Proposal del TP](https://github.com/hernancap/backend-TTADS-CINE/blob/main/docs/proposal.md)
 
 ## Deploy de la aplicación
 https://backend-ttads-cine.onrender.com
