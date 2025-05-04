@@ -16,16 +16,14 @@ if (result.error) {
 
 console.log(`Variables de entorno cargadas desde: ${envPath}`);
 
-const commonRequiredVars = [
+const productionRequiredVars = [
   'MERCADOPAGO_ACCESS_TOKEN',
-  'MONGODB_PASSWORD',
   'JWT_SECRET',
-  'FRONTEND_URL'
+  'FRONTEND_URL',
+  'MONGODB_URL'
 ];
 
-const environmentSpecificVars = mode === 'production' ? [] : ['PORT', 'NGROK_TOKEN'];
-
-const requiredEnvVars = [...commonRequiredVars, ...environmentSpecificVars];
+const requiredEnvVars = mode === 'production' ? productionRequiredVars : [];
 
 const missingEnvVars = requiredEnvVars.filter(
   varName => !process.env[varName]
@@ -43,18 +41,18 @@ export const env = {
   nodeEnv: mode,
   port: parseInt(process.env.PORT || defaultPort.toString(), 10),
   mercadopago: {
-    accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN as string
+    accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || 'token_invalido'
   },
   mongodb: {
-    password: process.env.MONGODB_PASSWORD as string
+    url: process.env.MONGODB_URL || 'mongodb://localhost:27017/cine'
   },
   jwt: {
-    secret: process.env.JWT_SECRET as string
+    secret: process.env.JWT_SECRET || 'secreto'
   },
   frontend: {
-    url: process.env.FRONTEND_URL as string
+    url: process.env.FRONTEND_URL || 'http://localhost:5173/'
   },
   ngrok: {
-    token: process.env.NGROK_TOKEN || ''
+    token: process.env.NGROK_TOKEN || 'token_invalido'
   }
 };

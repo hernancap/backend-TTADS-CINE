@@ -7,7 +7,7 @@ export const orm = await MikroORM.init({
     entitiesTs: ['src/**/*.entity.ts'],
     dbName: 'cine',
     driver: MongoDriver,
-    clientUrl: `mongodb+srv://hernancaparros:${process.env.MONGODB_PASSWORD}@cluster0.jlbuugw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
+    clientUrl: process.env.MONGODB_URL || "mongodb://localhost:27017/cine",
     highlighter: new MongoHighlighter(),
 //    debug: true,
 })
