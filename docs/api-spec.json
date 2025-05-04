@@ -222,9 +222,7 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "304": {}
-        },
+        "responses": {},
         "tags": []
       },
       "post": {
@@ -373,69 +371,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found all asientos"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "fila": {
-                        "type": "string"
-                      },
-                      "numero": {
-                        "type": "number"
-                      },
-                      "sala": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "fila",
-                      "numero",
-                      "sala"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67f8fee8fe3159465f3ad0b4",
-                      "fila": "A",
-                      "numero": 7,
-                      "sala": {
-                        "id": "67f8fee8fe3159465f3ad0af",
-                        "nombre": "Sala 1"
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/asientos",
@@ -516,134 +453,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found all funciones"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "fechaHora": {
-                        "type": "string"
-                      },
-                      "sala": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "pelicula": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          },
-                          "genero": {
-                            "type": "string"
-                          },
-                          "duracion": {
-                            "type": [
-                              "number",
-                              "string"
-                            ]
-                          },
-                          "director": {
-                            "type": "string"
-                          },
-                          "enCartelera": {
-                            "type": "boolean"
-                          },
-                          "proximamente": {
-                            "type": "boolean"
-                          },
-                          "poster_path": {
-                            "type": "string"
-                          },
-                          "calificacion": {
-                            "type": "string"
-                          },
-                          "sinopsis": {
-                            "type": "string"
-                          },
-                          "actors": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "precio": {
-                        "type": "number"
-                      },
-                      "tipo": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "fechaHora",
-                      "sala",
-                      "pelicula",
-                      "precio",
-                      "tipo"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67f8ff14fe3159465f3ad171",
-                      "fechaHora": "2025-04-11T15:00:00.000Z",
-                      "sala": {
-                        "id": "67f8fee8fe3159465f3ad0af",
-                        "nombre": "Sala 1"
-                      },
-                      "pelicula": {
-                        "id": "67f56a78dbaca5804ff3b4e5",
-                        "nombre": "El Amateur: Operación Venganza",
-                        "genero": "Acción",
-                        "duracion": 123,
-                        "director": "James Hawes",
-                        "enCartelera": true,
-                        "proximamente": false,
-                        "poster_path": "poster-1744136824141-849336333.jpeg",
-                        "calificacion": "+13",
-                        "sinopsis": "Charlie Heller es un brillante pero introvertido decodificador de la CIA que trabaja en una oficina en el sótano de la sede de Langley. Su vida cambia radicalmente cuando su esposa muere en un ataque terrorista en Londres. Cuando sus supervisores se niegan a tomar cartas en el asunto, toma las riendas y se embarca en un peligroso viaje por todo el mundo para localizar a los responsables. Su inteligencia será el arma definitiva para escapar y llevar a cabo su venganza.",
-                        "actors": [
-                          "67f56a53dbaca5804ff3b4e4"
-                        ]
-                      },
-                      "precio": 600,
-                      "tipo": "SUBTITULADA"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/funciones",
@@ -724,167 +535,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Found all entradas"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "precio": {
-                        "type": "number"
-                      },
-                      "fechaCompra": {
-                        "type": "string"
-                      },
-                      "usuario": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          },
-                          "email": {
-                            "type": "string"
-                          },
-                          "password": {
-                            "type": "string"
-                          },
-                          "tipo": {
-                            "type": "string"
-                          },
-                          "favoritos": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "funcion": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "fechaHora": {
-                            "type": "string"
-                          },
-                          "sala": {
-                            "type": "string"
-                          },
-                          "pelicula": {
-                            "type": "string"
-                          },
-                          "precio": {
-                            "type": "number"
-                          },
-                          "tipo": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "asientoFuncion": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "funcion": {
-                            "type": "string"
-                          },
-                          "asiento": {
-                            "type": "string"
-                          },
-                          "estado": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "usada": {
-                        "type": "boolean"
-                      },
-                      "pago_id": {
-                        "type": "number"
-                      },
-                      "pago_fecha": {
-                        "type": "string"
-                      },
-                      "pago_metodo": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "precio",
-                      "fechaCompra",
-                      "usuario",
-                      "funcion",
-                      "asientoFuncion",
-                      "usada",
-                      "pago_id",
-                      "pago_fecha",
-                      "pago_metodo"
-                    ]
-                  },
-                  "example": [
-                    {
-                      "id": "67f903edb5308ed5168fcbec",
-                      "precio": 600,
-                      "fechaCompra": "2025-04-11T11:58:37.662Z",
-                      "usuario": {
-                        "id": "67eacc0988ad0c52a7e3afcd",
-                        "nombre": "hernan",
-                        "email": "asd2@test.com",
-                        "password": "$2b$10$wirqEgC/of9wEnQxOqq9XenPzoBakuYAX4tD8iKTwNuc5lArWI/ly",
-                        "tipo": "admin",
-                        "favoritos": [
-                          "67f5896785b98ff2964e2f85",
-                          "67f594f285b98ff2964e2f91"
-                        ]
-                      },
-                      "funcion": {
-                        "id": "67f8ff15fe3159465f3ad25b",
-                        "fechaHora": "2025-04-11T19:40:00.000Z",
-                        "sala": "67f8fee8fe3159465f3ad0af",
-                        "pelicula": "67f56a78dbaca5804ff3b4e5",
-                        "precio": 600,
-                        "tipo": "SUBTITULADA"
-                      },
-                      "asientoFuncion": {
-                        "id": "67f8ff15fe3159465f3ad297",
-                        "funcion": "67f8ff15fe3159465f3ad25b",
-                        "asiento": "67f8fee8fe3159465f3ad0eb",
-                        "estado": "vendido"
-                      },
-                      "usada": false,
-                      "pago_id": 1322968512,
-                      "pago_fecha": "2025-04-11T11:58:36.101Z",
-                      "pago_metodo": "debvisa"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/entradas",
@@ -976,8 +628,236 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Todos los usuarios"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "tipo": {
+                        "type": "string"
+                      },
+                      "entradas": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "precio": {
+                              "type": "number"
+                            },
+                            "fechaCompra": {
+                              "type": "string"
+                            },
+                            "usuario": {
+                              "type": "string"
+                            },
+                            "funcion": {
+                              "type": "string"
+                            },
+                            "asientoFuncion": {
+                              "type": "string"
+                            },
+                            "usada": {
+                              "type": "boolean"
+                            },
+                            "pago_id": {
+                              "type": "number"
+                            },
+                            "pago_fecha": {
+                              "type": "string"
+                            },
+                            "pago_metodo": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "precio",
+                            "fechaCompra",
+                            "usuario",
+                            "funcion",
+                            "asientoFuncion",
+                            "usada",
+                            "pago_id",
+                            "pago_fecha",
+                            "pago_metodo"
+                          ]
+                        }
+                      },
+                      "favoritos": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "nombre",
+                      "email",
+                      "password",
+                      "tipo",
+                      "entradas",
+                      "favoritos"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67eacc0988ad0c52a7e3afcd",
+                      "nombre": "hernan",
+                      "email": "asd2@test.com",
+                      "password": "$2b$10$wirqEgC/of9wEnQxOqq9XenPzoBakuYAX4tD8iKTwNuc5lArWI/ly",
+                      "tipo": "admin",
+                      "entradas": [
+                        {
+                          "id": "67f903edb5308ed5168fcbec",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T11:58:37.662Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad25b",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad297",
+                          "usada": false,
+                          "pago_id": 1322968512,
+                          "pago_fecha": "2025-04-11T11:58:36.101Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f90494b5308ed5168fccd8",
+                          "precio": 540,
+                          "fechaCompra": "2025-04-11T12:01:24.543Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f90430b5308ed5168fcc63",
+                          "asientoFuncion": "67f90430b5308ed5168fcc7d",
+                          "usada": false,
+                          "pago_id": 1322968534,
+                          "pago_fecha": "2025-04-11T12:01:23.037Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906a6b5308ed5168fccd9",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:14.377Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad25b",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad298",
+                          "usada": false,
+                          "pago_id": 1322969984,
+                          "pago_fecha": "2025-04-11T12:10:12.847Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906a6b5308ed5168fccda",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:14.690Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad25b",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad2a5",
+                          "usada": false,
+                          "pago_id": 1322969984,
+                          "pago_fecha": "2025-04-11T12:10:12.847Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906d0b5308ed5168fccdb",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:56.718Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad2d0",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad30c",
+                          "usada": false,
+                          "pago_id": 1334677993,
+                          "pago_fecha": "2025-04-11T12:10:55.159Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906d1b5308ed5168fccdc",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:57.020Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad2d0",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad319",
+                          "usada": false,
+                          "pago_id": 1334677993,
+                          "pago_fecha": "2025-04-11T12:10:55.159Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906d1b5308ed5168fccde",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:57.364Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad2d0",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad326",
+                          "usada": false,
+                          "pago_id": 1334677993,
+                          "pago_fecha": "2025-04-11T12:10:55.159Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "67f906d1b5308ed5168fccdf",
+                          "precio": 600,
+                          "fechaCompra": "2025-04-11T12:10:57.666Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "67f8ff15fe3159465f3ad2d0",
+                          "asientoFuncion": "67f8ff15fe3159465f3ad327",
+                          "usada": false,
+                          "pago_id": 1334677993,
+                          "pago_fecha": "2025-04-11T12:10:55.159Z",
+                          "pago_metodo": "debvisa"
+                        },
+                        {
+                          "id": "6813d380f77ee0bbf7fe4cb5",
+                          "precio": 200,
+                          "fechaCompra": "2025-05-01T20:03:12.863Z",
+                          "usuario": "67eacc0988ad0c52a7e3afcd",
+                          "funcion": "6813b4c4344900ef116b6083",
+                          "asientoFuncion": "6813b4c4344900ef116b60ac",
+                          "usada": false,
+                          "pago_id": 1335547303,
+                          "pago_fecha": "2025-05-01T20:03:11.815Z",
+                          "pago_metodo": "debvisa"
+                        }
+                      ],
+                      "favoritos": [
+                        "67f5896785b98ff2964e2f85",
+                        "67f594f285b98ff2964e2f91"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "post": {
         "summary": "/api/usuarios",
@@ -986,14 +866,60 @@
         ],
         "parameters": [],
         "responses": {
-          "401": {
-            "description": "Unauthorized",
+          "201": {
+            "description": "Created",
             "schema": {
               "type": "object",
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "Acceso no autorizado"
+                  "example": "Usuario creado"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6817daa2da223a300932f309"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "cupones": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "favoritos": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "Hernán"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "admin@admin.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "******"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "comun"
+                    }
+                  }
                 }
               }
             }
@@ -1013,9 +939,66 @@
         ],
         "parameters": [],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuario autenticado"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "nombre": {
+                      "type": "string",
+                      "example": "Juan"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "juan@mail.com"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "comun"
+                    },
+                    "cupones": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "favoritos": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "6817daceda223a300932f30a"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "304": {}
         },
-        "tags": []
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/usuarios/{id}": {
@@ -1031,8 +1014,64 @@
             "required": true
           }
         ],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuario encontrado"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6817daa2da223a300932f309"
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "Hernán"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "admin@admin.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "******"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "comun"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "favoritos": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "put": {
         "summary": "/api/usuarios/{id}",
@@ -1046,8 +1085,66 @@
             "required": true
           }
         ],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuario actualizado"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "6817daa2da223a300932f309"
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "Hernán"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "admin@admin.com"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "admin"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "cupones": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "favoritos": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       },
       "patch": {
         "summary": "/api/usuarios/{id}",
@@ -1102,26 +1199,26 @@
                   "properties": {
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2Mzg1NTA2LCJleHAiOjE3NDYzODkxMDZ9.RLmPZyIzGJD__4LRA-FS59QGyFUbo0BrW8g3f6of6Gs"
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE3ZGFjZWRhMjIzYTMwMDkzMmYzMGEiLCJ1c2VyVHlwZSI6ImNvbXVuIiwiaWF0IjoxNzQ2MzkzODA5LCJleHAiOjE3NDYzOTc0MDl9.8BzPo8l04v9e4QdJnuZOXASlgK7_s3O-irTUuOy8ToA"
                     },
                     "user": {
                       "type": "object",
                       "properties": {
                         "id": {
                           "type": "string",
-                          "example": "67eacc0988ad0c52a7e3afcd"
+                          "example": "6817daceda223a300932f30a"
                         },
                         "nombre": {
                           "type": "string",
-                          "example": "hernan"
+                          "example": "Juan"
                         },
                         "email": {
                           "type": "string",
-                          "example": "asd2@test.com"
+                          "example": "juan@mail.com"
                         },
                         "tipo": {
                           "type": "string",
-                          "example": "admin"
+                          "example": "comun"
                         },
                         "entradas": {
                           "type": "array",
@@ -1139,21 +1236,9 @@
                         },
                         "favoritos": {
                           "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ]
-                          },
+                          "items": {},
                           "example": [
-                            {
-                              "id": "67f5896785b98ff2964e2f85"
-                            }
+                            null
                           ]
                         }
                       }
@@ -1188,24 +1273,8 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Acceso no autorizado"
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
+        "responses": {},
+        "tags": []
       },
       "post": {
         "summary": "/api/cupones",
