@@ -19,6 +19,8 @@ https://backend-ttads-cine.onrender.com
 ## Repositorio del frontend
 https://github.com/hernancap/frontend-TTADS-CINE
 
+## Video de demostración
+[Accede aquí al video de demostración (link de Youtube)](https://www.youtube.com/watch?v=T9uRGmsGdhM)
 
 # Credenciales de Prueba
 
