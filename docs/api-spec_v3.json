@@ -13,6 +13,115 @@
       "get": {
         "summary": "/api/peliculas",
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "found all peliculas"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "type": "string"
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "nombre": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "nombre"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "nombre",
+                          "genero",
+                          "duracion",
+                          "director",
+                          "enCartelera",
+                          "proximamente",
+                          "poster_path",
+                          "calificacion",
+                          "sinopsis",
+                          "actors"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "67f585d485b98ff2964e2f7e",
+                          "nombre": "Screamboat: La Masacre Del Ratón",
+                          "genero": "Terror",
+                          "duracion": "90",
+                          "director": "Steven LaMorte",
+                          "enCartelera": false,
+                          "proximamente": true,
+                          "poster_path": "poster-1744143828498-31470104.jpg",
+                          "calificacion": "+18",
+                          "sinopsis": "Un travieso ratón acecha a un grupo de neoyorquinos en un viaje nocturno en ferry, desatando un caos asesino en un viaje relajante. ¿Podrá la variopinta tripulación del barco encontrar la manera de detener a esta criatura asesina? ",
+                          "actors": [
+                            {
+                              "id": "67f585c585b98ff2964e2f7c",
+                              "nombre": "Tyler Posey"
+                            },
+                            {
+                              "id": "67f585cd85b98ff2964e2f7d",
+                              "nombre": "David Howard Thornton"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "304": {
             "description": ""
           }
@@ -28,56 +137,7 @@
     "/api/peliculas/reportes/favoritos": {
       "get": {
         "summary": "/api/peliculas/reportes/favoritos",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Películas favoritas por usuarios"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "nombre": {
-                            "type": "string"
-                          },
-                          "cantidadFavoritos": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "nombre",
-                          "cantidadFavoritos"
-                        ]
-                      },
-                      "example": [
-                        {
-                          "id": "67f5896785b98ff2964e2f85",
-                          "nombre": "El Contador 2 ",
-                          "cantidadFavoritos": 1
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -111,11 +171,11 @@
                       "properties": {
                         "id": {
                           "type": "string",
-                          "example": "67f594f285b98ff2964e2f91"
+                          "example": "67f5959a85b98ff2964e2f94"
                         },
                         "nombre": {
                           "type": "string",
-                          "example": "Encerrado"
+                          "example": "Destino Final: Lazos de Sangre"
                         },
                         "genero": {
                           "type": "string",
@@ -123,11 +183,11 @@
                         },
                         "duracion": {
                           "type": "string",
-                          "example": "95"
+                          "example": "90"
                         },
                         "director": {
                           "type": "string",
-                          "example": "David Yarovesky"
+                          "example": "Zach Lipovsky"
                         },
                         "enCartelera": {
                           "type": "boolean",
@@ -139,15 +199,15 @@
                         },
                         "poster_path": {
                           "type": "string",
-                          "example": "poster-1744147698765-970347976.jpg"
+                          "example": "poster-1744147866734-185136232.jpg"
                         },
                         "calificacion": {
                           "type": "string",
-                          "example": "+13"
+                          "example": "+16"
                         },
                         "sinopsis": {
                           "type": "string",
-                          "example": "Del productor Sam Raimi, este thriller de terror sigue a un ladrón (Bill Skarsgård) que irrumpe en el auto equivocado y se convierte en presa de su vengativo dueño (Anthony Hopkins). Eddie enfrenta un juego mortal de supervivencia, donde escapar es una ilusión y la justicia pisa el acelerador."
+                          "example": "Atragantada por una violenta pesadilla recurrente, la estudiante universitaria Stefanie regresa a casa para encontrar a la única persona que podría romper el ciclo y salvar a su familia de la horrible muerte que inevitablemente les espera a todos. "
                         },
                         "actors": {
                           "type": "array",
@@ -168,8 +228,8 @@
                           },
                           "example": [
                             {
-                              "id": "67f594a385b98ff2964e2f8f",
-                              "nombre": "Bill Skarsgård"
+                              "id": "67f5955b85b98ff2964e2f92",
+                              "nombre": "Tony Todd"
                             }
                           ]
                         }
@@ -179,9 +239,6 @@
                 }
               }
             }
-          },
-          "304": {
-            "description": ""
           }
         },
         "tags": []
@@ -443,8 +500,28 @@
       "get": {
         "summary": "/api/funciones",
         "responses": {
-          "304": {
-            "description": ""
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Found all funciones"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": []
@@ -532,11 +609,7 @@
     "/api/entradas/reporteEntradasPorPelicula": {
       "get": {
         "summary": "/api/entradas/reporteEntradasPorPelicula",
-        "responses": {
-          "304": {
-            "description": ""
-          }
-        },
+        "responses": {},
         "tags": []
       }
     },
@@ -617,7 +690,24 @@
     "/api/usuarios/me": {
       "get": {
         "summary": "/api/usuarios/me",
-        "responses": {},
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Token inválido"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "tags": []
       }
     },
@@ -735,7 +825,20 @@
                                   "type": "string"
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "id",
+                              "nombre",
+                              "genero",
+                              "duracion",
+                              "director",
+                              "enCartelera",
+                              "proximamente",
+                              "poster_path",
+                              "calificacion",
+                              "sinopsis",
+                              "actors"
+                            ]
                           },
                           "example": [
                             {
@@ -820,26 +923,26 @@
                       "properties": {
                         "token": {
                           "type": "string",
-                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE3ZGFjZWRhMjIzYTMwMDkzMmYzMGEiLCJ1c2VyVHlwZSI6ImNvbXVuIiwiaWF0IjoxNzQ2Mzk5MDI1LCJleHAiOjE3NDY0MDI2MjV9.-ef3mdmbv-iYKFBsyWJXgDynOPLv6RO_8zvBvOCO7lI"
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2NDUxMDQwLCJleHAiOjE3NDY0NTQ2NDB9.YksVLV-oC4smgskVLLlusH01HFhVY_wgzpaCvFc0gdA"
                         },
                         "user": {
                           "type": "object",
                           "properties": {
                             "id": {
                               "type": "string",
-                              "example": "6817daceda223a300932f30a"
+                              "example": "67eacc0988ad0c52a7e3afcd"
                             },
                             "nombre": {
                               "type": "string",
-                              "example": "Juan"
+                              "example": "hernan"
                             },
                             "email": {
                               "type": "string",
-                              "example": "juan@mail.com"
+                              "example": "asd2@test.com"
                             },
                             "tipo": {
                               "type": "string",
-                              "example": "comun"
+                              "example": "admin"
                             },
                             "entradas": {
                               "type": "array",
@@ -857,9 +960,21 @@
                             },
                             "favoritos": {
                               "type": "array",
-                              "items": {},
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              },
                               "example": [
-                                null
+                                {
+                                  "id": "67f5896785b98ff2964e2f85"
+                                }
                               ]
                             }
                           }
