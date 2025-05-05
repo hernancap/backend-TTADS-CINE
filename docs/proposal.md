@@ -10,7 +10,7 @@
 
 ## Tema
 ### Descripción
-Aplicación Web de un Cine en el que un usuario puede comprar entradas para las funciones de las películas que están en cartelera, así como también poder ver los detalles de las películas que se estrenarán en el futuro y poder agregarlas a favoritos en su perfil.
+Aplicación Web de un Cine en el que un usuario puede comprar entradas para las funciones de las películas que están en cartelera, así como también poder ver los detalles de las películas que se estrenarán en el futuro y poder agregarlas a favoritos en su perfil. Por otro lado, los usuarios de tipo administrador, además de tener control total en todo lo relacionado a la gestión de los datos de la aplicación, también podrá acceder a reportes con estadísticas.
 
 ### Modelo
 ![Modelo](Modelo.png)

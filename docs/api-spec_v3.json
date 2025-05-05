@@ -792,6 +792,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Mail o contraseña incorrectos"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": []

@@ -13,8 +13,13 @@ La aplicación está desarrollada en **TypeScript**. Utiliza **Node.js** como en
 ## Proposal
 [Accede aquí a la Proposal del TP](https://github.com/hernancap/backend-TTADS-CINE/blob/main/docs/proposal.md)
 
-## Deploy de la aplicación
+## Deploy de la aplicación (Backend)
 https://backend-ttads-cine.onrender.com
+
+**Aclaración:** Render "duerme" las aplicaciones si están 15 minutos sin recibir tráfico, para luego reactivarlas al momento de recibir la primera solicitud. Puede pasar que esta primera solicitud que se haga al probar la app tarde varios segundos en responder (hasta que se termine de activar la app), pero luego debería funcionar correctamente.
+
+## Deploy de la aplicación (Frontend)
+https://frontend-ttads-cine.onrender.com
 
 ## Repositorio del frontend
 https://github.com/hernancap/frontend-TTADS-CINE
