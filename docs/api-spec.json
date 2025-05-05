@@ -41,7 +41,10 @@
                         "type": "string"
                       },
                       "duracion": {
-                        "type": "string"
+                        "type": [
+                          "number",
+                          "string"
+                        ]
                       },
                       "director": {
                         "type": "string"
@@ -96,24 +99,24 @@
                   },
                   "example": [
                     {
-                      "id": "67f585d485b98ff2964e2f7e",
-                      "nombre": "Screamboat: La Masacre Del Ratón",
-                      "genero": "Terror",
-                      "duracion": "90",
-                      "director": "Steven LaMorte",
-                      "enCartelera": false,
-                      "proximamente": true,
-                      "poster_path": "poster-1744143828498-31470104.jpg",
-                      "calificacion": "+18",
-                      "sinopsis": "Un travieso ratón acecha a un grupo de neoyorquinos en un viaje nocturno en ferry, desatando un caos asesino en un viaje relajante. ¿Podrá la variopinta tripulación del barco encontrar la manera de detener a esta criatura asesina? ",
+                      "id": "67ead6071c000e50611ae6ed",
+                      "nombre": "Conclave",
+                      "genero": "Drama",
+                      "duracion": 124,
+                      "director": "Edward Berger",
+                      "enCartelera": true,
+                      "proximamente": false,
+                      "poster_path": "poster-1743443463223-570551928.png",
+                      "calificacion": "+16",
+                      "sinopsis": "Tras la inesperada muerte del Sumo Pontífice, el cardenal Lawrence es designado como responsable para liderar uno de los rituales más secretos y antiguos del mundo: la elección de un nuevo Papa. Cuando los líderes más poderosos de la Iglesia Católica se reúnen en los salones del Vaticano, Lawrence se ve atrapado dentro de una compleja conspiración a la vez que descubre un secreto que podría sacudir los cimientos de la Iglesia.",
                       "actors": [
                         {
-                          "id": "67f585c585b98ff2964e2f7c",
-                          "nombre": "Tyler Posey"
+                          "id": "67ead5f71c000e50611ae6eb",
+                          "nombre": "Ralph Fiennes"
                         },
                         {
-                          "id": "67f585cd85b98ff2964e2f7d",
-                          "nombre": "David Howard Thornton"
+                          "id": "67ead5fe1c000e50611ae6ec",
+                          "nombre": "Stanley Tucci"
                         }
                       ]
                     }
@@ -146,8 +149,54 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Películas favoritas por usuarios"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      },
+                      "cantidadFavoritos": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "nombre",
+                      "cantidadFavoritos"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "67f5867085b98ff2964e2f81",
+                      "nombre": "El día que la Tierra explotó: Una película de Looney Tunes",
+                      "cantidadFavoritos": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/peliculas/{id}": {
@@ -178,23 +227,23 @@
                   "properties": {
                     "id": {
                       "type": "string",
-                      "example": "67f5959a85b98ff2964e2f94"
+                      "example": "67f5963985b98ff2964e2f98"
                     },
                     "nombre": {
                       "type": "string",
-                      "example": "Destino Final: Lazos de Sangre"
+                      "example": "Misión imposible: Sentencia final"
                     },
                     "genero": {
                       "type": "string",
-                      "example": "Suspenso"
+                      "example": "Acción"
                     },
                     "duracion": {
                       "type": "string",
-                      "example": "90"
+                      "example": "120"
                     },
                     "director": {
                       "type": "string",
-                      "example": "Zach Lipovsky"
+                      "example": "Christopher McQuarrie"
                     },
                     "enCartelera": {
                       "type": "boolean",
@@ -206,15 +255,15 @@
                     },
                     "poster_path": {
                       "type": "string",
-                      "example": "poster-1744147866734-185136232.jpg"
+                      "example": "poster-1744148025441-818082336.jpg"
                     },
                     "calificacion": {
                       "type": "string",
-                      "example": "+16"
+                      "example": "ATP"
                     },
                     "sinopsis": {
                       "type": "string",
-                      "example": "Atragantada por una violenta pesadilla recurrente, la estudiante universitaria Stefanie regresa a casa para encontrar a la única persona que podría romper el ciclo y salvar a su familia de la horrible muerte que inevitablemente les espera a todos. "
+                      "example": "Octava entrega de la franquicia Misión Imposible."
                     },
                     "actors": {
                       "type": "array",
@@ -235,8 +284,8 @@
                       },
                       "example": [
                         {
-                          "id": "67f5955b85b98ff2964e2f92",
-                          "nombre": "Tony Todd"
+                          "id": "67f595e385b98ff2964e2f95",
+                          "nombre": "Tom Cruise"
                         }
                       ]
                     }
@@ -660,8 +709,49 @@
           "application/json"
         ],
         "parameters": [],
-        "responses": {},
-        "tags": []
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Número de entradas vendidas por película en los últimos 7 días"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "pelicula": {
+                        "type": "string"
+                      },
+                      "cantidad": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "pelicula",
+                      "cantidad"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "pelicula": "El Amateur: Operación Venganza",
+                      "cantidad": 3
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/api/entradas/{id}": {
@@ -754,54 +844,6 @@
         ],
         "parameters": [],
         "responses": {
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Token inválido"
-                }
-              }
-            }
-          }
-        },
-        "tags": [],
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/api/usuarios/{id}": {
-      "get": {
-        "summary": "/api/usuarios/{id}",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {},
-        "tags": []
-      },
-      "put": {
-        "summary": "/api/usuarios/{id}",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
           "200": {
             "description": "OK",
             "schema": {
@@ -809,15 +851,11 @@
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "Usuario actualizado"
+                  "example": "Usuario autenticado"
                 },
                 "data": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6817daceda223a300932f30a"
-                    },
                     "nombre": {
                       "type": "string",
                       "example": "Juan"
@@ -829,13 +867,6 @@
                     "tipo": {
                       "type": "string",
                       "example": "comun"
-                    },
-                    "entradas": {
-                      "type": "array",
-                      "items": {},
-                      "example": [
-                        null
-                      ]
                     },
                     "cupones": {
                       "type": "array",
@@ -921,6 +952,177 @@
                           ]
                         }
                       ]
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "6817daceda223a300932f30a"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "304": {}
+        },
+        "tags": [],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/usuarios/{id}": {
+      "get": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      },
+      "put": {
+        "summary": "/api/usuarios/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Usuario actualizado"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "67eacc0988ad0c52a7e3afcd"
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "hernan"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "asd2@test.com"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "admin"
+                    },
+                    "entradas": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "cupones": {
+                      "type": "array",
+                      "items": {},
+                      "example": [
+                        null
+                      ]
+                    },
+                    "favoritos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "nombre": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "duracion": {
+                            "type": "string"
+                          },
+                          "director": {
+                            "type": "string"
+                          },
+                          "enCartelera": {
+                            "type": "boolean"
+                          },
+                          "proximamente": {
+                            "type": "boolean"
+                          },
+                          "poster_path": {
+                            "type": "string"
+                          },
+                          "calificacion": {
+                            "type": "string"
+                          },
+                          "sinopsis": {
+                            "type": "string"
+                          },
+                          "actors": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "nombre",
+                          "genero",
+                          "duracion",
+                          "director",
+                          "enCartelera",
+                          "proximamente",
+                          "poster_path",
+                          "calificacion",
+                          "sinopsis",
+                          "actors"
+                        ]
+                      },
+                      "example": [
+                        {
+                          "id": "67f5896785b98ff2964e2f85",
+                          "nombre": "El Contador 2 ",
+                          "genero": "Acción",
+                          "duracion": "120",
+                          "director": "Gavin O'Connor",
+                          "enCartelera": false,
+                          "proximamente": true,
+                          "poster_path": "poster-1744144743764-340027050.jpg",
+                          "calificacion": "+13",
+                          "sinopsis": "Christian Wolff (Ben Affleck) tiene talento para resolver problemas complejos. Cuando un viejo conocido es asesinado, dejando tras de sí un críptico mensaje para \"encontrar al contador\", Wolff se ve obligado a resolver el caso. Al darse cuenta de que son necesarias medidas más extremas, Wolff recluta a su distanciado y altamente letal hermano, Brax (Jon Bernthal), para que lo ayude. En asociación con la subdirectora del Tesoro de los Estados Unido, Marybeth Medina (Cynthia Addai-Robinson), descubren una mortal conspiración, convirtiéndose en objetivos de una despiadada red de asesinos que no se detendrán ante nada para mantener sus secretos enterrados.",
+                          "actors": [
+                            "67f5892d85b98ff2964e2f82",
+                            "67f5893985b98ff2964e2f83",
+                            "67f5894285b98ff2964e2f84"
+                          ]
+                        }
+                      ]
                     }
                   }
                 }
@@ -986,7 +1188,7 @@
                   "properties": {
                     "token": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2NDUxMDQwLCJleHAiOjE3NDY0NTQ2NDB9.YksVLV-oC4smgskVLLlusH01HFhVY_wgzpaCvFc0gdA"
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2VhY2MwOTg4YWQwYzUyYTdlM2FmY2QiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ2NDUyNzkxLCJleHAiOjE3NDY0NTYzOTF9.YZ8zuCEDmsaeW4CQiZpt1qTJS3IPep_4BW2siND8UAc"
                     },
                     "user": {
                       "type": "object",
@@ -1043,6 +1245,18 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Mail o contraseña incorrectos"
                 }
               }
             }

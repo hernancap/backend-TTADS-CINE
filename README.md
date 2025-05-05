@@ -26,12 +26,12 @@ https://github.com/hernancap/frontend-TTADS-CINE
 
 | Rol           | Email       | Contraseña  |
 |--------------|----------------------|-------------|
-| **Admin** | `admin@admin.com`               | `12345678`  |
-| **Cliente**      | `juan@mail.com`               | `juanjuan`  |
+| **Admin** | `admin@admin.com`               | `adminadmin`  |
+| **Cliente**      | `luisp@mail.com`               | `luisperez`  |
 
 ---
 
-## Tarjeta para Pago Aprobado  
+## Tarjeta de DÉBITO para Pago Aprobado  
 
 | **Número de Tarjeta** | `4002 7686 9439 5619` |
 |-------------------------|----------------------|
